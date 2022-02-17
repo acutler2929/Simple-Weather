@@ -12,8 +12,14 @@
 		<h1>Welcome to my minimalist weather app!</h1>
 		<p>Your City:</p>
 		<form onsubmit="return false">
-			<input type="text" id="my-city" />
-			<input type="submit" onclick="getCity()" />
+			<input type="text" id="my-city" placeholder="city" />
+			<input type="text" id="state-code" placeholder="state eg: AL" />
+			<input
+				type="text"
+				id="country-code"
+				placeholder="country eg: USA"
+			/>
+			<input type="submit" onclick="getWeather()" />
 		</form>
 	</body>
 </html>
