@@ -14,11 +14,9 @@
 		<form onsubmit="return false">
 			<input type="text" id="my-city" placeholder="city" />
 			<input type="text" id="state-code" placeholder="state eg: AL" />
-			<input
-				type="text"
-				id="country-code"
-				placeholder="country eg: USA"
-			/>
+			<select id="country-code">
+				<option value="USA">USA</option>
+			</select>
 			<input type="submit" onclick="getWeather()" />
 		</form>
 	</body>
