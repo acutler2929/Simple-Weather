@@ -9,15 +9,33 @@
 		<script defer src="app.js"></script>
 	</head>
 	<body>
-		<h1>Welcome to my minimalist weather app!</h1>
-		<p>Your City:</p>
-		<form onsubmit="return false">
-			<input type="text" id="my-city" placeholder="city" />
-			<input type="text" id="state-code" placeholder="state eg: AL" />
-			<select id="country-code">
-				<option value="USA">USA</option>
-			</select>
-			<input type="submit" onclick="getWeather()" />
-		</form>
+		<div id="dity-input">
+			<h1>Welcome to my minimalist weather app!</h1>
+			<p>Your City:</p>
+			<form onsubmit="return false">
+				<input type="text" id="my-city" placeholder="city" />
+				<input type="text" id="state-code" placeholder="state eg: AL" />
+				<select id="country-code">
+					<option value="USA">USA</option>
+				</select>
+				<input type="submit" onclick="getWeather()" />
+			</form>
+		</div>
+		<div id="current-weather-wrapper">
+			<!-- <div id="current-weather">
+				<p>The weather is currently ${weatherDescription}.</p>
+				<p>
+					The weather in ${city} is currently ${temp} degrees
+					fahrenheit.
+				</p>
+				<img src="${icon}" />
+			</div> -->
+		</div>
+		<div id="hourly-forecast-wrapper">
+			<div id="hourly-forecast"></div>
+		</div>
+		<div id="weekly-forecast-wrapper">
+			<div id="weekly-forecast"></div>
+		</div>
 	</body>
 </html>
