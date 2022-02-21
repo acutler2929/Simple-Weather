@@ -9,7 +9,7 @@
 		<script defer src="app.js"></script>
 	</head>
 	<body>
-		<div id="dity-input">
+		<div id="city-input">
 			<h1>Welcome to my minimalist weather app!</h1>
 			<p>Your City:</p>
 			<form onsubmit="return false">
@@ -18,24 +18,30 @@
 				<select id="country-code">
 					<option value="USA">USA</option>
 				</select>
-				<input type="submit" onclick="getWeather()" />
+				<input type="submit" onclick="displayWeather()" />
 			</form>
 		</div>
-		<div id="current-weather-wrapper">
-			<!-- <div id="current-weather">
-				<p>The weather is currently ${weatherDescription}.</p>
-				<p>
-					The weather in ${city} is currently ${temp} degrees
-					fahrenheit.
-				</p>
+		<div id="forecast-wrapper">
+			<div id="current-weather-wrapper">
+				<!--<div id="current-weather">
+				<p>The weather in ${city} is currently ${weatherDescription} at ${temp} degrees fahrenheit.</p>
 				<img src="${icon}" />
 			</div> -->
-		</div>
-		<div id="hourly-forecast-wrapper">
-			<div id="hourly-forecast"></div>
-		</div>
-		<div id="weekly-forecast-wrapper">
-			<div id="weekly-forecast"></div>
+			</div>
+			<div id="hourly-forecast-wrapper">
+				<!-- <div class="hourly-forecast">
+					<p>
+						HOURLY ${weatherDescription} at ${temp} &deg;F
+					</p>
+					<img class="hourly-img" src="${icon}" />
+				</div> -->
+			</div>
+			<div id="one-week-forecast-wrapper">
+				<!-- <div class="one-week-forecast">
+					<p>ONE WEEK ${weatherDescription} at ${temp} &deg;F</p>
+					<img class="one-week-img" src="${icon}" />
+				</div> -->
+			</div>
 		</div>
 	</body>
 </html>

@@ -1,3 +1,60 @@
 body {
-	background-color: aqua;
+	background-color: skyblue;
+}
+
+#city-input {
+	margin: auto;
+	text-align: center;
+}
+
+#forecast-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+#current-weather-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+#current-weather {
+	border: 5px solid black;
+	margin: auto;
+	text-align: center;
+	height: 300px;
+	width: 300px;
+}
+
+#hourly-forecast-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+#one-week-forecast-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.hourly-forecast {
+	border: 5px solid black;
+	height: 100px;
+	width: 100px;
+	text-align: center;
+}
+
+.one-week-forecast {
+	border: 5px solid black;
+	height: 200px;
+	width: 200px;
+	text-align: center;
+}
+
+.hourly-img {
+	height: 33px;
+	width: 33px;
+}
+
+.one-week-img {
+	height: 66px;
+	width: 66px;
 }
