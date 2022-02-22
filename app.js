@@ -1,6 +1,6 @@
 'use strict';
 
-const PRIVATE_KEY = 'meif903nj54ks89vs876qope32if4590'; // testing git secrets
+const PRIVATE_KEY = 'meif903nj54ks89vs876qope32if4593'; // testing git secrets
 
 const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const myCity = document.getElementById('my-city').value;
