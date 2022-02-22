@@ -1,6 +1,6 @@
 'use strict';
 
-const apiKey = '4eac42842fc5e8d5ee87039982674145'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const myCity = document.getElementById('my-city').value;
 const stateCode = document.getElementById('state-code').value;
 const countryCode = document.getElementById('country-code').value;
