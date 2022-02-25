@@ -1,7 +1,7 @@
 'use strict';
 
 function displayWeather() {
-	const apiKey = '12409e6fffe497c9a19d71197a23418e'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
 	// const countryCode = document.getElementById('country-code').value;
