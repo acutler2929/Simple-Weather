@@ -98,3 +98,7 @@ body {
 	width: 66px;
 	margin-bottom: 25%;
 }
+
+.hidden {
+	display: none;
+}

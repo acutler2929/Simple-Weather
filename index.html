@@ -18,8 +18,24 @@
 				<select id="country-code">
 					<option value="USA">USA</option>
 				</select>
-				<input type="submit" onclick="displayWeather()" />
+				<input
+					type="submit"
+					onclick="displayWeather(), showWeatherTabs()"
+				/>
 			</form>
+			<nav>
+				<form onsubmit="return false">
+					<button type="button" onclick="selectCurrentWeather()">
+						Current
+					</button>
+					<button type="button" onclick="selectHourlyWeather()">
+						Hourly
+					</button>
+					<button type="button" onclick="selectWeekWeather()">
+						One Week
+					</button>
+				</form>
+			</nav>
 		</div>
 		<div id="forecast-wrapper">
 			<div id="current-weather-wrapper">

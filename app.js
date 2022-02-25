@@ -1,7 +1,7 @@
 'use strict';
 
 function displayWeather() {
-	const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	const apiKey = '12409e6fffe497c9a19d71197a23418e'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
 	// const countryCode = document.getElementById('country-code').value;
@@ -107,4 +107,20 @@ function displayWeather() {
 		displayHourlyWeather();
 		displayWeekWeather();
 	})();
+}
+
+function showWeatherTabs() {
+	console.log('Display the weather tabs.');
+}
+
+function selectCurrentWeather() {
+	console.log('Show just the currrent weather.');
+}
+
+function selectHourlyWeather() {
+	console.log('Show just the hourly weather.');
+}
+
+function selectWeekWeather() {
+	console.log('Show just the weeks weather');
 }
