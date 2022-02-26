@@ -1,7 +1,7 @@
 'use strict';
 
 function displayWeather() {
-	const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
 	// const countryCode = document.getElementById('country-code').value;
@@ -42,7 +42,7 @@ function displayWeather() {
 			const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
 
 			const currentHtml = `
-			<div id="current-weather">
+			<div id="current-weather" class="hidden">
 				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
 				<img id="current-weather-img" src="${currIcon}" />
 				</div>
@@ -51,6 +51,9 @@ function displayWeather() {
 			document
 				.getElementById('current-weather-wrapper')
 				.insertAdjacentHTML('afterbegin', currentHtml);
+			document
+				.getElementById('current-weather')
+				.classList.remove('hidden');
 		};
 
 		//////////////// then display the 24-hour weather...
@@ -64,7 +67,7 @@ function displayWeather() {
 				const hourlyIcon = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
 
 				const hourlyHtml = `
-					<div class="hourly-forecast">
+					<div class="hourly-forecast" class="hidden">
 						<p class="hourly-forecast-text">
 						HOURLY ${hourlyWeatherDescription} at ${hourlyTemp} &deg;F
 						</p>
@@ -89,7 +92,7 @@ function displayWeather() {
 				const weekIcon = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
 
 				const weekHtml = `
-			<div class="one-week-forecast">
+			<div class="one-week-forecast" class="hidden">
 			<p class="one-week-forecast-text">
 			ONE WEEK ${weekWeatherDescription} at ${weekTemp} &deg;F
 			</p>
@@ -109,18 +112,34 @@ function displayWeather() {
 	})();
 }
 
+// const cssHidden = `
+// 	.hidden {
+// 		display: none;
+// 	}
+// `;
+
 function showWeatherTabs() {
+	document.querySelector('nav').classList.remove('hidden');
 	console.log('Display the weather tabs.');
 }
 
 function selectCurrentWeather() {
+	document.getElementById('current-weather').classList.remove('hidden');
+	document.getElementById('hourly-forecast').classList.add('hidden');
+	document.getElementById('one-week-forecast').classList.add('hidden');
 	console.log('Show just the currrent weather.');
 }
 
 function selectHourlyWeather() {
+	document.getElementById('hourly-forecast').classList.remove('hidden');
+	document.getElementById('current-weather').classList.add('hidden');
+	document.getElementById('one-week-forecast').classList.add('hidden');
 	console.log('Show just the hourly weather.');
 }
 
 function selectWeekWeather() {
+	document.getElementById('one-week-forecast').classList.remove('hidden');
+	document.getElementById('current-weather').classList.add('hidden');
+	document.getElementById('hourly-forecast').classList.add('hidden');
 	console.log('Show just the weeks weather');
 }
