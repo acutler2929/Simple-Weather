@@ -3,9 +3,9 @@
 // const config = require('./config.js');
 // const apiKey = config.API_KEY;
 
-define(function (require) {
-	require('dotenv').config();
-});
+// define(function (require) {
+// 	require('dotenv').config();
+// });
 
 // require(['dotenv'], function (dotenv) {
 // 	//foo is now loaded.
@@ -15,7 +15,9 @@ define(function (require) {
 // require('dotenv').config();
 // console.log(process.env);
 
-function displayWeather() {
+import * as config from './config.js';
+
+window.displayWeather = function () {
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
 	// const countryCode = document.getElementById('country-code').value;
@@ -28,7 +30,7 @@ function displayWeather() {
 	///////////////////// take City, State and Country from HTML body and get coordinates...
 	async function getWeather() {
 		let response = await fetch(
-			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
+			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${config.API_KEY}`
 		);
 		const data = await response.json();
 		const myCityLat = data[0].lat;
@@ -38,7 +40,7 @@ function displayWeather() {
 
 		//////////////////// send coordinates to get the weather...
 		let myWeather = await fetch(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${config.API_KEY}`
 		);
 		return myWeather.json();
 	}
@@ -124,16 +126,16 @@ function displayWeather() {
 		displayHourlyWeather();
 		displayWeekWeather();
 	})();
-}
+};
 
 //////////// show the nav tabs:
-function showWeatherTabs() {
+window.showWeatherTabs = function () {
 	document.querySelector('nav').classList.remove('hidden');
 	console.log('Display the weather tabs.');
-}
+};
 
 ///////////////// DEFAULT display Current Weather- hide Hourly and One Week Weather:
-function selectCurrentWeather() {
+window.selectCurrentWeather = function () {
 	document
 		.getElementById('current-weather-wrapper')
 		.classList.remove('hidden');
@@ -142,10 +144,10 @@ function selectCurrentWeather() {
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
 	console.log('Show just the currrent weather.');
-}
+};
 
 /////////////////// display Hourly Weather- and hide Current and One Week Weather:
-function selectHourlyWeather() {
+window.selectHourlyWeather = function () {
 	document
 		.getElementById('hourly-forecast-wrapper')
 		.classList.remove('hidden'); // broken classList
@@ -154,14 +156,43 @@ function selectHourlyWeather() {
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
 	console.log('Show just the hourly weather.');
-}
+};
 
 /////////////////////// display One Week Weather- and hide Current and Hourly Weather:
-function selectWeekWeather() {
+window.selectWeekWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.remove('hidden'); // broken classList
 	document.getElementById('current-weather-wrapper').classList.add('hidden');
 	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
 	console.log('Show just the weeks weather');
-}
+};
+
+//////////// finally, I set up the buttons:
+// window.onload = function () {
+// 	console.log(document.getElementById('submin-btn'));
+// 	document
+// 		.getElementById('submit-btn')
+// 		.addEventlistener('click', displayWeather());
+
+// 	document
+// 		.getElementById('current-btn')
+// 		.addEventlistener('click', console.log('current'));
+
+// 	document
+// 		.getElementById('hourly-btn')
+// 		.addEventlistener('click', console.log('hourly'));
+
+// 	document
+// 		.getElementById('week-btn')
+// 		.addEventlistener('click', console.log('week'));
+// };
+
+// const init = function () {
+// 	displayWeather();
+// 	showWeatherTabs();
+// 	selectCurrentWeather();
+// 	selectHourlyWeather();
+// 	selectWeekWeather();
+// };
+// init();

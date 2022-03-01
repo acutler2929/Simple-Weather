@@ -6,11 +6,21 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
 		<link rel="stylesheet" href="style.css" />
-		<script
+		<!-- <script
 			defer
 			data-main="app.js"
 			src="node_modules/requirejs/require.js"
-		></script>
+		></script> -->
+		<!-- <script defer src="node_modules/dotenv/config.js"></script> -->
+		<script defer type="module" src="app.js"></script>
+		<!-- <script type="module">
+			import * as app from './app.js';
+			// let displayWeather = function () {};
+			// let showWeatherTabs = function () {};
+			// let selectCurrentWeather = function () {};
+			// let selectHourlyWeather = function () {};
+			// let selectWeekWeather = function () {};
+		</script> -->
 	</head>
 	<body>
 		<div id="city-input">
@@ -26,6 +36,7 @@
 					type="submit"
 					onclick="displayWeather(), showWeatherTabs()"
 				/>
+				<!-- <button type="button" id="submit-btn">Submit</button> -->
 			</form>
 			<nav class="hidden">
 				<form onsubmit="return false">
@@ -38,6 +49,9 @@
 					<button type="button" onclick="selectWeekWeather()">
 						One Week
 					</button>
+					<!-- <button type="button" id="current-btn">Current</button>
+					<button type="button" id="hourly-btn">Hourly</button>
+					<button type="button" id="week-btn">One Week</button> -->
 				</form>
 			</nav>
 		</div>
