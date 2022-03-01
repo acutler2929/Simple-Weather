@@ -6,7 +6,11 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
 		<link rel="stylesheet" href="style.css" />
-		<script defer src="app.js"></script>
+		<script
+			defer
+			data-main="app.js"
+			src="node_modules/requirejs/require.js"
+		></script>
 	</head>
 	<body>
 		<div id="city-input">
@@ -44,7 +48,7 @@
 				<img src="${icon}" />
 			</div> -->
 			</div>
-			<div id="hourly-forecast-wrapper">
+			<div id="hourly-forecast-wrapper" class="hidden">
 				<!-- <div class="hourly-forecast">
 					<p>
 						HOURLY ${weatherDescription} at ${temp} &deg;F
@@ -52,7 +56,7 @@
 					<img class="hourly-img" src="${icon}" />
 				</div> -->
 			</div>
-			<div id="one-week-forecast-wrapper">
+			<div id="one-week-forecast-wrapper" class="hidden">
 				<!-- <div class="one-week-forecast">
 					<p>ONE WEEK ${weatherDescription} at ${temp} &deg;F</p>
 					<img class="one-week-img" src="${icon}" />

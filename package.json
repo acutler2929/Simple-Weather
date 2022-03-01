@@ -1,0 +1,23 @@
+{
+  "name": "simple-weather",
+  "version": "1.0.0",
+  "description": "Simple Weather is a minimalist weather app using the Open Weather API.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alice Cutler",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acutler1987/Simple-Weather.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acutler1987/Simple-Weather/issues"
+  },
+  "homepage": "https://github.com/acutler1987/Simple-Weather#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "requirejs": "^2.3.6"
+  }
+}

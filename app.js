@@ -1,7 +1,21 @@
 'use strict';
 
+// const config = require('./config.js');
+// const apiKey = config.API_KEY;
+
+define(function (require) {
+	require('dotenv').config();
+});
+
+// require(['dotenv'], function (dotenv) {
+// 	//foo is now loaded.
+// 	console.log(dotenv);
+// });
+
+// require('dotenv').config();
+// console.log(process.env);
+
 function displayWeather() {
-	const apiKey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // DELETE BEFORE PUSHING TO REPO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
 	// const countryCode = document.getElementById('country-code').value;
@@ -42,7 +56,7 @@ function displayWeather() {
 			const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
 
 			const currentHtml = `
-			<div id="current-weather" class="hidden">
+			<div id="current-weather">
 				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
 				<img id="current-weather-img" src="${currIcon}" />
 				</div>
@@ -67,7 +81,7 @@ function displayWeather() {
 				const hourlyIcon = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
 
 				const hourlyHtml = `
-					<div class="hourly-forecast" class="hidden">
+					<div class="hourly-forecast">
 						<p class="hourly-forecast-text">
 						HOURLY ${hourlyWeatherDescription} at ${hourlyTemp} &deg;F
 						</p>
@@ -92,7 +106,7 @@ function displayWeather() {
 				const weekIcon = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
 
 				const weekHtml = `
-			<div class="one-week-forecast" class="hidden">
+			<div class="one-week-forecast">
 			<p class="one-week-forecast-text">
 			ONE WEEK ${weekWeatherDescription} at ${weekTemp} &deg;F
 			</p>
@@ -112,34 +126,42 @@ function displayWeather() {
 	})();
 }
 
-// const cssHidden = `
-// 	.hidden {
-// 		display: none;
-// 	}
-// `;
-
+//////////// show the nav tabs:
 function showWeatherTabs() {
 	document.querySelector('nav').classList.remove('hidden');
 	console.log('Display the weather tabs.');
 }
 
+///////////////// DEFAULT display Current Weather- hide Hourly and One Week Weather:
 function selectCurrentWeather() {
-	document.getElementById('current-weather').classList.remove('hidden');
-	document.getElementById('hourly-forecast').classList.add('hidden');
-	document.getElementById('one-week-forecast').classList.add('hidden');
+	document
+		.getElementById('current-weather-wrapper')
+		.classList.remove('hidden');
+	document.getElementById('hourly-forecast-wrapper').classList.add('hidden'); // broken classList
+	document
+		.getElementById('one-week-forecast-wrapper')
+		.classList.add('hidden');
 	console.log('Show just the currrent weather.');
 }
 
+/////////////////// display Hourly Weather- and hide Current and One Week Weather:
 function selectHourlyWeather() {
-	document.getElementById('hourly-forecast').classList.remove('hidden');
-	document.getElementById('current-weather').classList.add('hidden');
-	document.getElementById('one-week-forecast').classList.add('hidden');
+	document
+		.getElementById('hourly-forecast-wrapper')
+		.classList.remove('hidden'); // broken classList
+	document.getElementById('current-weather-wrapper').classList.add('hidden');
+	document
+		.getElementById('one-week-forecast-wrapper')
+		.classList.add('hidden');
 	console.log('Show just the hourly weather.');
 }
 
+/////////////////////// display One Week Weather- and hide Current and Hourly Weather:
 function selectWeekWeather() {
-	document.getElementById('one-week-forecast').classList.remove('hidden');
-	document.getElementById('current-weather').classList.add('hidden');
-	document.getElementById('hourly-forecast').classList.add('hidden');
+	document
+		.getElementById('one-week-forecast-wrapper')
+		.classList.remove('hidden'); // broken classList
+	document.getElementById('current-weather-wrapper').classList.add('hidden');
+	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
 	console.log('Show just the weeks weather');
 }
