@@ -10,11 +10,16 @@ body {
 #forecast-wrapper {
 	display: flex;
 	flex-direction: column;
+	height: 300px;
+	width: 80vw;
+	margin: auto;
+	position: relative;
 }
 
 #current-weather-wrapper {
 	display: flex;
 	justify-content: center;
+	margin: auto;
 }
 
 #current-weather {
@@ -45,12 +50,14 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	position: absolute;
 }
 
 #one-week-forecast-wrapper {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	position: absolute;
 }
 
 .hourly-forecast {

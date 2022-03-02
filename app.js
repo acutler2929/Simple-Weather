@@ -1,21 +1,9 @@
 'use strict';
 
-// const config = require('./config.js');
-// const apiKey = config.API_KEY;
-
-// define(function (require) {
-// 	require('dotenv').config();
-// });
-
-// require(['dotenv'], function (dotenv) {
-// 	//foo is now loaded.
-// 	console.log(dotenv);
-// });
-
-// require('dotenv').config();
-// console.log(process.env);
-
 import * as config from './config.js';
+
+import moment from './node_modules';
+moment().format();
 
 window.displayWeather = function () {
 	// const myCity = document.getElementById('my-city').value;
@@ -35,8 +23,6 @@ window.displayWeather = function () {
 		const data = await response.json();
 		const myCityLat = data[0].lat;
 		const myCityLon = data[0].lon;
-		// console.log(data);
-		// console.log(myCityLat, myCityLon);
 
 		//////////////////// send coordinates to get the weather...
 		let myWeather = await fetch(
@@ -74,7 +60,16 @@ window.displayWeather = function () {
 
 		//////////////// then display the 24-hour weather...
 		const displayHourlyWeather = function () {
-			weatherData.hourly.slice(0, 24).forEach((data, i) => {
+			console.log(weatherData);
+
+			weatherData.hourly.slice(0, 12).forEach((data, i) => {
+				const timestamp = weatherData.hourly[i].dt;
+
+				const hour = moment.unix(timestamp).format('hh');
+				console.log(hour);
+				// const hourAMPM = hello;
+				// console.log(hourAMPM);
+
 				const hourlyTemp = Math.trunc(
 					((weatherData.hourly[i].temp - 273.15) * 9) / 5 + 32
 				);
@@ -85,7 +80,7 @@ window.displayWeather = function () {
 				const hourlyHtml = `
 					<div class="hourly-forecast">
 						<p class="hourly-forecast-text">
-						HOURLY ${hourlyWeatherDescription} at ${hourlyTemp} &deg;F
+						${hour} ${hourlyWeatherDescription} at ${hourlyTemp} &deg;F
 						</p>
 						<img class="hourly-img" src="${hourlyIcon}" />
 					</div>
@@ -167,32 +162,3 @@ window.selectWeekWeather = function () {
 	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
 	console.log('Show just the weeks weather');
 };
-
-//////////// finally, I set up the buttons:
-// window.onload = function () {
-// 	console.log(document.getElementById('submin-btn'));
-// 	document
-// 		.getElementById('submit-btn')
-// 		.addEventlistener('click', displayWeather());
-
-// 	document
-// 		.getElementById('current-btn')
-// 		.addEventlistener('click', console.log('current'));
-
-// 	document
-// 		.getElementById('hourly-btn')
-// 		.addEventlistener('click', console.log('hourly'));
-
-// 	document
-// 		.getElementById('week-btn')
-// 		.addEventlistener('click', console.log('week'));
-// };
-
-// const init = function () {
-// 	displayWeather();
-// 	showWeatherTabs();
-// 	selectCurrentWeather();
-// 	selectHourlyWeather();
-// 	selectWeekWeather();
-// };
-// init();
