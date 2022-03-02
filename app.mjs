@@ -1,8 +1,8 @@
 'use strict';
 
-import * as config from './config.js';
+import * as config from './config.mjs';
 
-import moment from './node_modules';
+import moment from './node_modules/moment';
 moment().format();
 
 window.displayWeather = function () {
