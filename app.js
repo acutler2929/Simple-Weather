@@ -62,15 +62,13 @@ window.displayWeather = function () {
 			console.log(weatherData);
 
 			weatherData.hourly.slice(0, 12).forEach((data, i) => {
-				const timeStamp = weatherData.hourly[i].dt;
-				console.log(timeStamp);
-				const hour = new Date(timeStamp * 1000).toLocaleString(
+				const hourTimeStamp = weatherData.hourly[i].dt;
+				const hour = new Date(hourTimeStamp * 1000).toLocaleString(
 					'en-US',
 					{ hour: 'numeric', hour12: true }
 				);
-				console.log(hour); // convert unix timestamp to hour;
-				// const hourAMPM = convert to ampm hours;
-				// console.log(hourAMPM);
+				// console.log(hourTimeStamp);
+				// console.log(hour);
 
 				const hourlyTemp = Math.trunc(
 					((weatherData.hourly[i].temp - 273.15) * 9) / 5 + 32
@@ -97,6 +95,15 @@ window.displayWeather = function () {
 		///////////////// and finally display the weather for the week...
 		const displayWeekWeather = function () {
 			weatherData.daily.forEach((data, i) => {
+				const dayTimeStamp = weatherData.daily[i].dt;
+
+				const dayOfWeek = new Date(dayTimeStamp * 1000).toLocaleString(
+					'en-US',
+					{ weekday: 'long' }
+				);
+				console.log(dayOfWeek);
+				console.log(dayTimeStamp);
+
 				const weekTemp = Math.trunc(
 					((weatherData.daily[i].temp.day - 273.15) * 9) / 5 + 32
 				);
@@ -107,7 +114,7 @@ window.displayWeather = function () {
 				const weekHtml = `
 			<div class="one-week-forecast">
 			<p class="one-week-forecast-text">
-			ONE WEEK ${weekWeatherDescription} at ${weekTemp} &deg;F
+			${dayOfWeek} ${weekWeatherDescription} at ${weekTemp} &deg;F
 			</p>
 			<img class="one-week-img" src="${weekIcon}" />
 			</div>
