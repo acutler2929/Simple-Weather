@@ -37,7 +37,8 @@ body {
 }
 
 #current-weather-text {
-	font-size: 18px;
+	font-size: 20px;
+	margin: 10px 2px 10px 2px;
 }
 
 #current-weather-img {
@@ -68,20 +69,20 @@ body {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 3px;
-	height: 100px;
-	width: 100px;
+	height: 150px;
+	width: 150px;
 	text-align: center;
 }
 
 .hourly-forecast-text {
-	font-size: 14px;
-	margin: 5px 0px 5px 0px;
+	font-size: 16px;
+	margin: 5px 2px 5px 2px;
 }
 
 .hourly-img {
 	align-self: center;
-	height: 40px;
-	width: 40px;
+	height: 80px;
+	width: 80px;
 }
 .one-week-forecast {
 	align-items: center;
@@ -91,13 +92,14 @@ body {
 	margin: 3px;
 	display: flex;
 	flex-direction: column;
-	height: 200px;
-	width: 200px;
+	height: 180px;
+	width: 180px;
 	text-align: center;
 }
 
 .one-week-forecast-text {
 	font-size: 16px;
+	margin: 10px 2px 10px 2px;
 }
 
 .one-week-img {

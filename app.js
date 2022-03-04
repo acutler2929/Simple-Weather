@@ -5,13 +5,13 @@ import config from './config.js';
 import DateTime from './node_modules/luxon/src/datetime.js';
 
 window.displayWeather = function () {
-	// const myCity = document.getElementById('my-city').value;
-	// const stateCode = document.getElementById('state-code').value;
-	// const countryCode = document.getElementById('country-code').value;
+	const myCity = document.getElementById('my-city').value;
+	const stateCode = document.getElementById('state-code').value;
+	const countryCode = document.getElementById('country-code').value;
 	/////////// use these variables for testing:
-	const myCity = 'kalamazoo';
-	const stateCode = 'mi';
-	const countryCode = 'usa';
+	// const myCity = 'kalamazoo';
+	// const stateCode = 'mi';
+	// const countryCode = 'usa';
 	const resultLimit = 1;
 
 	///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -35,6 +35,7 @@ window.displayWeather = function () {
 		const weatherData = await getWeather();
 		/////////////// then use weatherData to display the current weather...
 		const displayCurrWeather = function () {
+			console.log(weatherData);
 			const currTemp = Math.trunc(
 				((weatherData.current.temp - 273.15) * 9) / 5 + 32
 			);
@@ -59,23 +60,23 @@ window.displayWeather = function () {
 
 		//////////////// then display the 24-hour weather...
 		const displayHourlyWeather = function () {
-			console.log(weatherData);
+			// for some reason the hourly data comes to us in reverse order, so I just unreverse it:
+			const hourArray = weatherData.hourly.slice(0, 12).reverse();
 
-			weatherData.hourly.slice(0, 12).forEach((data, i) => {
-				const hourTimeStamp = weatherData.hourly[i].dt;
+			hourArray.forEach((data, i) => {
+				const hourTimeStamp = hourArray[i].dt;
 				const hour = new Date(hourTimeStamp * 1000).toLocaleString(
 					'en-US',
 					{ hour: 'numeric', hour12: true }
 				);
-				// console.log(hourTimeStamp);
-				// console.log(hour);
 
 				const hourlyTemp = Math.trunc(
-					((weatherData.hourly[i].temp - 273.15) * 9) / 5 + 32
+					((hourArray[i].temp - 273.15) * 9) / 5 + 32
 				);
+				console.log(typeof hourlyTemp);
 				const hourlyWeatherDescription =
-					weatherData.hourly[i].weather[0].description;
-				const hourlyIcon = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
+					hourArray[i].weather[0].description;
+				const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
 
 				const hourlyHtml = `
 					<div class="hourly-forecast">
@@ -94,27 +95,35 @@ window.displayWeather = function () {
 
 		///////////////// and finally display the weather for the week...
 		const displayWeekWeather = function () {
-			weatherData.daily.forEach((data, i) => {
-				const dayTimeStamp = weatherData.daily[i].dt;
+			// for some reason the weeks data comes to us in reverse order, so I just unreverse it:
+			const weekArray = weatherData.daily.reverse();
+
+			weekArray.forEach((data, i) => {
+				const dayTimeStamp = weekArray[i].dt;
 
 				const dayOfWeek = new Date(dayTimeStamp * 1000).toLocaleString(
 					'en-US',
 					{ weekday: 'long' }
 				);
-				console.log(dayOfWeek);
-				console.log(dayTimeStamp);
+				// console.log(dayTimeStamp);
+				// console.log(dayOfWeek);
 
-				const weekTemp = Math.trunc(
-					((weatherData.daily[i].temp.day - 273.15) * 9) / 5 + 32
+				const dayTempHigh = Math.trunc(
+					((weekArray[i].temp.max - 273.15) * 9) / 5 + 32
 				);
+
+				const dayTempLow = Math.trunc(
+					((weekArray[i].temp.min - 273.15) * 9) / 5 + 32
+				);
+
 				const weekWeatherDescription =
-					weatherData.daily[i].weather[0].description;
-				const weekIcon = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
+					weekArray[i].weather[0].description;
+				const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
 
 				const weekHtml = `
 			<div class="one-week-forecast">
 			<p class="one-week-forecast-text">
-			${dayOfWeek} ${weekWeatherDescription} at ${weekTemp} &deg;F
+			${dayOfWeek} ${weekWeatherDescription} at ${dayTempHigh} / ${dayTempLow} &deg;F
 			</p>
 			<img class="one-week-img" src="${weekIcon}" />
 			</div>
