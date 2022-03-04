@@ -1,8 +1,6 @@
 'use strict';
 
 import config from './config.js';
-// import { DateTime } from './node_modules/luxon/build/es6/luxon.js';
-import DateTime from './node_modules/luxon/src/datetime.js';
 
 window.displayWeather = function () {
 	const myCity = document.getElementById('my-city').value;
