@@ -15,9 +15,5 @@
 	"bugs": {
 		"url": "https://github.com/acutler1987/Simple-Weather/issues"
 	},
-	"homepage": "https://github.com/acutler1987/Simple-Weather#readme",
-	"dependencies": {
-		"luxon": "^2.3.1",
-		"requirejs": "^2.3.6"
-	}
+	"homepage": "https://github.com/acutler1987/Simple-Weather#readme"
 }
