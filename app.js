@@ -1,9 +1,8 @@
 'use strict';
 
-import * as config from './config.js';
-
-import moment from './node_modules';
-moment().format();
+import config from './config.js';
+// import { DateTime } from './node_modules/luxon/build/es6/luxon.js';
+import DateTime from './node_modules/luxon/src/datetime.js';
 
 window.displayWeather = function () {
 	// const myCity = document.getElementById('my-city').value;
@@ -63,11 +62,14 @@ window.displayWeather = function () {
 			console.log(weatherData);
 
 			weatherData.hourly.slice(0, 12).forEach((data, i) => {
-				const timestamp = weatherData.hourly[i].dt;
-
-				const hour = moment.unix(timestamp).format('hh');
-				console.log(hour);
-				// const hourAMPM = hello;
+				const timeStamp = weatherData.hourly[i].dt;
+				console.log(timeStamp);
+				const hour = new Date(timeStamp * 1000).toLocaleString(
+					'en-US',
+					{ hour: 'numeric', hour12: true }
+				);
+				console.log(hour); // convert unix timestamp to hour;
+				// const hourAMPM = convert to ampm hours;
 				// console.log(hourAMPM);
 
 				const hourlyTemp = Math.trunc(

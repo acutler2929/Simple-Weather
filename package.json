@@ -17,8 +17,7 @@
 	},
 	"homepage": "https://github.com/acutler1987/Simple-Weather#readme",
 	"dependencies": {
-		"dotenv": "^16.0.0",
-		"moment": "^2.29.1",
+		"luxon": "^2.3.1",
 		"requirejs": "^2.3.6"
 	}
 }
