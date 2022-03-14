@@ -3,13 +3,13 @@
 import config from './config.js';
 
 window.displayWeather = function () {
-	const myCity = document.getElementById('my-city').value;
-	const stateCode = document.getElementById('state-code').value;
-	const countryCode = document.getElementById('country-code').value;
+	// const myCity = document.getElementById('my-city').value;
+	// const stateCode = document.getElementById('state-code').value;
+	// const countryCode = document.getElementById('country-code').value;
 	/////////// use these variables for testing:
-	// const myCity = 'kalamazoo';
-	// const stateCode = 'mi';
-	// const countryCode = 'usa';
+	const myCity = 'kalamazoo';
+	const stateCode = 'mi';
+	const countryCode = 'usa';
 	const resultLimit = 1;
 
 	///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -79,7 +79,7 @@ window.displayWeather = function () {
 				const hourlyHtml = `
 					<div class="hourly-forecast">
 						<p class="hourly-forecast-text">
-						${hour} ${hourlyWeatherDescription} at ${hourlyTemp} &deg;F
+						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
 						</p>
 						<img class="hourly-img" src="${hourlyIcon}" />
 					</div>
@@ -121,7 +121,7 @@ window.displayWeather = function () {
 				const weekHtml = `
 			<div class="one-week-forecast">
 			<p class="one-week-forecast-text">
-			${dayOfWeek} ${weekWeatherDescription} at ${dayTempHigh} / ${dayTempLow} &deg;F
+			${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F
 			</p>
 			<img class="one-week-img" src="${weekIcon}" />
 			</div>
