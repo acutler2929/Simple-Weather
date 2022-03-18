@@ -32,22 +32,24 @@
 				<select id="country-code">
 					<option value="USA">USA</option>
 				</select>
-				<input
-					type="submit"
+				<button
+					type="button"
 					onclick="displayWeather(), showWeatherTabs()"
-				/>
+				>
+					<span>Submit</span>
+				</button>
 				<!-- <button type="button" id="submit-btn">Submit</button> -->
 			</form>
 			<nav class="hidden">
 				<form onsubmit="return false">
 					<button type="button" onclick="selectCurrentWeather()">
-						Current
+						<span>Current</span>
 					</button>
 					<button type="button" onclick="selectHourlyWeather()">
-						Hourly
+						<span>Hourly</span>
 					</button>
 					<button type="button" onclick="selectWeekWeather()">
-						One Week
+						<span>One Week</span>
 					</button>
 					<!-- <button type="button" id="current-btn">Current</button>
 					<button type="button" id="hourly-btn">Hourly</button>
