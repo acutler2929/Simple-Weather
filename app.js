@@ -42,7 +42,7 @@ window.displayWeather = function () {
 			const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
 
 			const currentHtml = `
-			<div id="current-weather">
+			<div id="current-weather" class="forecast-boxes">
 				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
 				<img id="current-weather-img" src="${currIcon}" />
 				</div>
@@ -77,7 +77,7 @@ window.displayWeather = function () {
 				const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
 
 				const hourlyHtml = `
-					<div class="hourly-forecast">
+					<div class="forecast-boxes hourly-forecast">
 						<p class="hourly-forecast-text">
 						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
 						</p>
@@ -119,7 +119,7 @@ window.displayWeather = function () {
 				const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
 
 				const weekHtml = `
-			<div class="one-week-forecast">
+			<div class="forecast-boxes one-week-forecast">
 			<p class="one-week-forecast-text">
 			${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F
 			</p>

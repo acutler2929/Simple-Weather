@@ -1,5 +1,5 @@
 body {
-	background-color: skyblue;
+	background-color: rgb(55, 184, 235);
 }
 
 #city-input {
@@ -24,7 +24,6 @@ body {
 
 #current-weather {
 	border: 2px solid black;
-	border-radius: 10%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -61,9 +60,18 @@ body {
 	position: absolute;
 }
 
+.buttons {
+	background-color: aliceblue;
+	border-radius: 10%;
+}
+
+.forecast-boxes {
+	background-color: skyblue;
+	border-radius: 10%;
+}
+
 .hourly-forecast {
 	border: 2px solid black;
-	border-radius: 10%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -88,7 +96,6 @@ body {
 	align-items: center;
 	justify-content: space-between;
 	border: 2px solid black;
-	border-radius: 10%;
 	margin: 3px;
 	display: flex;
 	flex-direction: column;
