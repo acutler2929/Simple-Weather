@@ -6,33 +6,26 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
 		<link rel="stylesheet" href="style.css" />
-		<!-- <script
-			defer
-			data-main="app.js"
-			src="node_modules/requirejs/require.js"
-		></script> -->
-		<!-- <script defer src="node_modules/dotenv/config.js"></script> -->
 		<script defer type="module" src="app.js"></script>
-		<!-- <script type="module">
-			import * as app from './app.js';
-			// let displayWeather = function () {};
-			// let showWeatherTabs = function () {};
-			// let selectCurrentWeather = function () {};
-			// let selectHourlyWeather = function () {};
-			// let selectWeekWeather = function () {};
-		</script> -->
 	</head>
 	<body>
 		<header>
 			<h1>Welcome to my minimalist weather app!</h1>
+			<i>~Powered by Open Weather API~</i>
 			<p>Your City:</p>
 		</header>
 		<nav>
 			<div id="city-input">
 				<form onsubmit="return false">
-					<input type="text" id="my-city" placeholder="city" />
 					<input
 						type="text"
+						class="input-fields"
+						id="my-city"
+						placeholder="city"
+					/>
+					<input
+						type="text"
+						class="input-fields"
 						id="state-code"
 						placeholder="state eg: AL"
 					/>
@@ -41,6 +34,7 @@
 					</select>
 					<button
 						type="button"
+						class="buttons"
 						onclick="displayWeather(), showForecastButtons()"
 					>
 						<span>Submit</span>
@@ -49,18 +43,27 @@
 			</div>
 			<div id="forecast-buttons" class="hidden">
 				<form onsubmit="return false">
-					<button type="button" onclick="selectCurrentWeather()">
+					<button
+						type="button"
+						class="buttons"
+						onclick="selectCurrentWeather()"
+					>
 						<span>Current</span>
 					</button>
-					<button type="button" onclick="selectHourlyWeather()">
+					<button
+						type="button"
+						class="buttons"
+						onclick="selectHourlyWeather()"
+					>
 						<span>Hourly</span>
 					</button>
-					<button type="button" onclick="selectWeekWeather()">
+					<button
+						type="button"
+						class="buttons"
+						onclick="selectWeekWeather()"
+					>
 						<span>One Week</span>
 					</button>
-					<!-- <button type="button" id="current-btn">Current</button>
-					<button type="button" id="hourly-btn">Hourly</button>
-					<button type="button" id="week-btn">One Week</button> -->
 				</form>
 			</div>
 		</nav>
@@ -74,7 +77,7 @@
 			<div id="hourly-forecast-wrapper" class="hidden">
 				<!-- <div class="forecast-boxes hourly-forecast">
 					<p class="hourly-forecast-text">
-					${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
+						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
 					</p>
 					<img class="hourly-img" src="${hourlyIcon}" />
 				</div> -->

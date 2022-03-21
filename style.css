@@ -1,5 +1,6 @@
 body {
 	background-color: rgb(55, 184, 235);
+	/* min-height: 100vh; */
 }
 
 header {
@@ -15,12 +16,12 @@ header {
 #forecast-buttons {
 	margin: auto;
 	text-align: center;
+	padding: 10px 0px 10px 0px;
 }
 
 #forecast-wrapper {
 	display: flex;
 	flex-direction: column;
-	height: 300px;
 	width: 75vw;
 	margin: auto;
 	position: relative;
@@ -71,9 +72,27 @@ header {
 }
 
 .buttons {
-	background-color: aliceblue;
-	border-radius: 10%;
+	border: 2px solid black;
+	height: 25px;
+	width: 80px;
+	background-color: #e7e7e7;
+	border-radius: 10px;
 }
+
+.buttons:active {
+	background-color: white;
+}
+
+.input-fields {
+	border-radius: 10px;
+	border: 1px solid black;
+	height: 25px;
+	text-align: center;
+}
+
+/* .input-fields:focus {
+	background-color: gold;
+} */
 
 .forecast-boxes {
 	background-color: skyblue;
@@ -127,4 +146,13 @@ header {
 
 .hidden {
 	visibility: collapse;
+}
+
+footer {
+	bottom: 0;
+	height: 2.5rem;
+	width: 100vw;
+	margin: auto;
+	text-align: center;
+	position: relative;
 }

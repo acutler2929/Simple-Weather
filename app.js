@@ -140,7 +140,7 @@ window.displayWeather = function () {
 
 //////////// show the nav tabs:
 window.showForecastButtons = function () {
-	document.querySelector('nav').classList.remove('hidden');
+	document.getElementById('forecast-buttons').classList.remove('hidden');
 	console.log('Display the weather tabs.');
 };
 
@@ -149,7 +149,7 @@ window.selectCurrentWeather = function () {
 	document
 		.getElementById('current-weather-wrapper')
 		.classList.remove('hidden');
-	document.getElementById('hourly-forecast-wrapper').classList.add('hidden'); // broken classList
+	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
@@ -160,7 +160,7 @@ window.selectCurrentWeather = function () {
 window.selectHourlyWeather = function () {
 	document
 		.getElementById('hourly-forecast-wrapper')
-		.classList.remove('hidden'); // broken classList
+		.classList.remove('hidden');
 	document.getElementById('current-weather-wrapper').classList.add('hidden');
 	document
 		.getElementById('one-week-forecast-wrapper')
@@ -172,7 +172,7 @@ window.selectHourlyWeather = function () {
 window.selectWeekWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
-		.classList.remove('hidden'); // broken classList
+		.classList.remove('hidden');
 	document.getElementById('current-weather-wrapper').classList.add('hidden');
 	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
 	console.log('Show just the weeks weather');
