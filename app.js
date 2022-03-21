@@ -42,11 +42,11 @@ window.displayWeather = function () {
 			const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
 
 			const currentHtml = `
-			<div id="current-weather" class="forecast-boxes">
-				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-				<img id="current-weather-img" src="${currIcon}" />
+				<div id="current-weather" class="forecast-boxes">
+					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
+					<img id="current-weather-img" src="${currIcon}" />
 				</div>
-				`;
+			`;
 
 			document
 				.getElementById('current-weather-wrapper')
@@ -119,13 +119,12 @@ window.displayWeather = function () {
 				const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
 
 				const weekHtml = `
-			<div class="forecast-boxes one-week-forecast">
-			<p class="one-week-forecast-text">
-			${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F
-			</p>
-			<img class="one-week-img" src="${weekIcon}" />
-			</div>
-			`;
+					<div class="forecast-boxes one-week-forecast">
+						<p class="one-week-forecast-text">
+						${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
+						<img class="one-week-img" src="${weekIcon}" />
+					</div>
+				`;
 
 				document
 					.getElementById('one-week-forecast-wrapper')
@@ -140,7 +139,7 @@ window.displayWeather = function () {
 };
 
 //////////// show the nav tabs:
-window.showWeatherTabs = function () {
+window.showForecastButtons = function () {
 	document.querySelector('nav').classList.remove('hidden');
 	console.log('Display the weather tabs.');
 };

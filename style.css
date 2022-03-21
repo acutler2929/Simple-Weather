@@ -2,7 +2,17 @@ body {
 	background-color: rgb(55, 184, 235);
 }
 
+header {
+	margin: auto;
+	text-align: center;
+}
+
 #city-input {
+	margin: auto;
+	text-align: center;
+}
+
+#forecast-buttons {
 	margin: auto;
 	text-align: center;
 }
@@ -116,6 +126,5 @@ body {
 }
 
 .hidden {
-	/* display: none; */
 	visibility: collapse;
 }

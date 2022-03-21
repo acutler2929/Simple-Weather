@@ -23,24 +23,31 @@
 		</script> -->
 	</head>
 	<body>
-		<div id="city-input">
+		<header>
 			<h1>Welcome to my minimalist weather app!</h1>
 			<p>Your City:</p>
-			<form onsubmit="return false">
-				<input type="text" id="my-city" placeholder="city" />
-				<input type="text" id="state-code" placeholder="state eg: AL" />
-				<select id="country-code">
-					<option value="USA">USA</option>
-				</select>
-				<button
-					type="button"
-					onclick="displayWeather(), showWeatherTabs()"
-				>
-					<span>Submit</span>
-				</button>
-				<!-- <button type="button" id="submit-btn">Submit</button> -->
-			</form>
-			<nav class="hidden">
+		</header>
+		<nav>
+			<div id="city-input">
+				<form onsubmit="return false">
+					<input type="text" id="my-city" placeholder="city" />
+					<input
+						type="text"
+						id="state-code"
+						placeholder="state eg: AL"
+					/>
+					<select id="country-code">
+						<option value="USA">USA</option>
+					</select>
+					<button
+						type="button"
+						onclick="displayWeather(), showForecastButtons()"
+					>
+						<span>Submit</span>
+					</button>
+				</form>
+			</div>
+			<div id="forecast-buttons" class="hidden">
 				<form onsubmit="return false">
 					<button type="button" onclick="selectCurrentWeather()">
 						<span>Current</span>
@@ -55,27 +62,28 @@
 					<button type="button" id="hourly-btn">Hourly</button>
 					<button type="button" id="week-btn">One Week</button> -->
 				</form>
-			</nav>
-		</div>
+			</div>
+		</nav>
 		<div id="forecast-wrapper">
 			<div id="current-weather-wrapper">
-				<!--<div id="current-weather">
-				<p>The weather in ${city} is currently ${weatherDescription} at ${temp} degrees fahrenheit.</p>
-				<img src="${icon}" />
-			</div> -->
+				<!-- <div id="current-weather" class="forecast-boxes">
+					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
+					<img id="current-weather-img" src="${currIcon}" />
+				</div> -->
 			</div>
 			<div id="hourly-forecast-wrapper" class="hidden">
-				<!-- <div class="hourly-forecast">
-					<p>
-						HOURLY ${weatherDescription} at ${temp} &deg;F
+				<!-- <div class="forecast-boxes hourly-forecast">
+					<p class="hourly-forecast-text">
+					${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
 					</p>
-					<img class="hourly-img" src="${icon}" />
+					<img class="hourly-img" src="${hourlyIcon}" />
 				</div> -->
 			</div>
 			<div id="one-week-forecast-wrapper" class="hidden">
-				<!-- <div class="one-week-forecast">
-					<p>ONE WEEK ${weatherDescription} at ${temp} &deg;F</p>
-					<img class="one-week-img" src="${icon}" />
+				<!-- <div class="forecast-boxes one-week-forecast">
+					<p class="one-week-forecast-text">
+					${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
+					<img class="one-week-img" src="${weekIcon}" />
 				</div> -->
 			</div>
 		</div>
