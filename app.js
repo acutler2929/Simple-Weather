@@ -3,13 +3,13 @@
 import config from './config.js';
 
 window.displayWeather = function () {
-	// const myCity = document.getElementById('my-city').value;
-	// const stateCode = document.getElementById('state-code').value;
-	// const countryCode = document.getElementById('country-code').value;
+	const myCity = document.getElementById('my-city').value;
+	const stateCode = document.getElementById('state-code').value;
+	const countryCode = document.getElementById('country-code').value;
 	/////////// use these variables for testing:
-	const myCity = 'kalamazoo';
-	const stateCode = 'mi';
-	const countryCode = 'usa';
+	// const myCity = 'kalamazoo';
+	// const stateCode = 'mi';
+	// const countryCode = 'usa';
 	const resultLimit = 1;
 
 	///////////////////// take City, State and Country from HTML body and get coordinates...
