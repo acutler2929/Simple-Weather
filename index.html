@@ -5,89 +5,92 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="style/style.css" />
 		<script defer type="module" src="app.js"></script>
 	</head>
 	<body>
-		<header>
-			<h1>Welcome to my minimalist weather app!</h1>
-			<i>~Powered by Open Weather API~</i>
-			<p>Your City:</p>
-		</header>
-		<nav>
-			<div id="city-input">
-				<form onsubmit="return false">
-					<input
-						type="text"
-						class="input-fields"
-						id="my-city"
-						placeholder="city"
-					/>
-					<input
-						type="text"
-						class="input-fields"
-						id="state-code"
-						placeholder="state eg: AL"
-					/>
-					<select id="country-code">
-						<option value="USA">USA</option>
-					</select>
-					<button
-						type="button"
-						class="buttons"
-						onclick="displayWeather(), showForecastButtons()"
-					>
-						<span>Submit</span>
-					</button>
-				</form>
-			</div>
-			<div id="forecast-buttons" class="hidden">
-				<form onsubmit="return false">
-					<button
-						type="button"
-						class="buttons"
-						onclick="selectCurrentWeather()"
-					>
-						<span>Current</span>
-					</button>
-					<button
-						type="button"
-						class="buttons"
-						onclick="selectHourlyWeather()"
-					>
-						<span>Hourly</span>
-					</button>
-					<button
-						type="button"
-						class="buttons"
-						onclick="selectWeekWeather()"
-					>
-						<span>One Week</span>
-					</button>
-				</form>
-			</div>
-		</nav>
-		<div id="forecast-wrapper">
-			<div id="current-weather-wrapper">
-				<!-- <div id="current-weather" class="forecast-boxes">
+		<div id="content-wrapper">
+			<header>
+				<h1>Welcome to my minimalist weather app!</h1>
+				<i>~Powered by Open Weather API~</i>
+				<p>Your City:</p>
+			</header>
+			<nav>
+				<div id="city-input">
+					<form onsubmit="return false">
+						<input
+							type="text"
+							class="input-fields"
+							id="my-city"
+							placeholder="city"
+						/>
+						<input
+							type="text"
+							class="input-fields"
+							id="state-code"
+							placeholder="state eg: AL"
+						/>
+						<select id="country-code">
+							<option value="USA">USA</option>
+						</select>
+						<button
+							type="button"
+							class="buttons"
+							onclick="displayWeather(), showForecastButtons()"
+						>
+							<span>Submit</span>
+						</button>
+					</form>
+				</div>
+				<div id="forecast-buttons" class="hidden">
+					<form onsubmit="return false">
+						<button
+							type="button"
+							class="buttons"
+							onclick="selectCurrentWeather()"
+						>
+							<span>Current</span>
+						</button>
+						<button
+							type="button"
+							class="buttons"
+							onclick="selectHourlyWeather()"
+						>
+							<span>Hourly</span>
+						</button>
+						<button
+							type="button"
+							class="buttons"
+							onclick="selectWeekWeather()"
+						>
+							<span>One Week</span>
+						</button>
+					</form>
+				</div>
+			</nav>
+			<div id="forecast-wrapper">
+				<!-- <img id="weather-img" href="?????" /> -->
+				<div id="current-weather-wrapper">
+					<!-- <div id="current-weather" class="forecast-boxes">
 					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
 					<img id="current-weather-img" src="${currIcon}" />
 				</div> -->
-			</div>
-			<div id="hourly-forecast-wrapper" class="hidden">
-				<!-- <div class="forecast-boxes hourly-forecast">
+				</div>
+				<div id="hourly-forecast-wrapper" class="hidden">
+					<!-- <div class="forecast-boxes hourly-forecast">
 					<p class="hourly-forecast-text">
 						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
 					</p>
 					<img class="hourly-img" src="${hourlyIcon}" />
 				</div> -->
-			</div>
-			<div id="one-week-forecast-wrapper" class="hidden">
-				<!-- <div class="forecast-boxes one-week-forecast">
+				</div>
+				<div id="one-week-forecast-wrapper" class="hidden">
+					<!-- <div class="forecast-boxes one-week-forecast">
 					<p class="one-week-forecast-text">
-					${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-					<img class="one-week-img" src="${weekIcon}" />
-				</div> -->
+						${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
+						<img class="one-week-img" src="${weekIcon}" />
+					</div> -->
+				</div>
 			</div>
 		</div>
 	</body>

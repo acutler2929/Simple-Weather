@@ -2,17 +2,17 @@
 
 import config from './config.js';
 
-// Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
-// const apiKey = config.API_KEY;
+// Use this variable only when testing, comment out before deploying. apiKey is set to an environment variable in CPanel.
+const apiKey = config.API_KEY;
 
 window.displayWeather = function () {
-	const myCity = document.getElementById('my-city').value;
-	const stateCode = document.getElementById('state-code').value;
-	const countryCode = document.getElementById('country-code').value;
+	// const myCity = document.getElementById('my-city').value;
+	// const stateCode = document.getElementById('state-code').value;
+	// const countryCode = document.getElementById('country-code').value;
 	/////////// use these variables for testing:
-	// const myCity = 'kalamazoo';
-	// const stateCode = 'mi';
-	// const countryCode = 'usa';
+	const myCity = 'kalamazoo';
+	const stateCode = 'mi';
+	const countryCode = 'usa';
 	const resultLimit = 1;
 
 	///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -51,6 +51,52 @@ window.displayWeather = function () {
 				</div>
 			`;
 
+			let currWeatherImage = '';
+
+			switch (currIcon) {
+				case 'http://openweathermap.org/img/wn/01d@2x.png':
+					currWeatherImage = 'url(../assets/clear-sky-day.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/01n@2x.png':
+					currWeatherImage = 'url(../assets/clear-sky-night.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/02d@2x.png':
+				case 'http://openweathermap.org/img/wn/03d@2x.png':
+				case 'http://openweathermap.org/img/wn/04d@2x.png':
+					currWeatherImage = 'url(../assets/cloudy-day.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/02n@2x.png':
+				case 'http://openweathermap.org/img/wn/03n@2x.png':
+				case 'http://openweathermap.org/img/wn/04n@2x.png':
+					currWeatherImage = 'url(../assets/cloudy-night.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/09d@2x.png':
+				case 'http://openweathermap.org/img/wn/10d@2x.png':
+					currWeatherImage = 'url(../assets/rainy-day.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/09n@2x.png':
+				case 'http://openweathermap.org/img/wn/10n@2x.png':
+					currWeatherImage = 'url(../assets/rainy-night.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/11d@2x.png':
+				case 'http://openweathermap.org/img/wn/11n@2x.png':
+					currWeatherImage = 'url(../assets/thunderstorm.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/13d@2x.png':
+					currWeatherImage = 'url(../assets/snowy-day.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/13n@2x.png':
+					currWeatherImage = 'url(../assets/snowy-night.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/50d@2x.png':
+					currWeatherImage = 'url(../assets/misty-day.jpg)';
+					break;
+				case 'http://openweathermap.org/img/wn/50n@2x.png':
+					currWeatherImage = 'url(../assets/misty-night.jpg)';
+			}
+
+			document.getElementById('content-wrapper').style.backgroundImage =
+				currWeatherImage;
 			document
 				.getElementById('current-weather-wrapper')
 				.insertAdjacentHTML('afterbegin', currentHtml);
@@ -74,7 +120,6 @@ window.displayWeather = function () {
 				const hourlyTemp = Math.trunc(
 					((hourArray[i].temp - 273.15) * 9) / 5 + 32
 				);
-				console.log(typeof hourlyTemp);
 				const hourlyWeatherDescription =
 					hourArray[i].weather[0].description;
 				const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
@@ -106,8 +151,6 @@ window.displayWeather = function () {
 					'en-US',
 					{ weekday: 'long' }
 				);
-				// console.log(dayTimeStamp);
-				// console.log(dayOfWeek);
 
 				const dayTempHigh = Math.trunc(
 					((weekArray[i].temp.max - 273.15) * 9) / 5 + 32
@@ -144,7 +187,7 @@ window.displayWeather = function () {
 //////////// show the nav tabs:
 window.showForecastButtons = function () {
 	document.getElementById('forecast-buttons').classList.remove('hidden');
-	console.log('Display the weather tabs.');
+	// console.log('Display the weather tabs.');
 };
 
 ///////////////// DEFAULT display Current Weather- hide Hourly and One Week Weather:
@@ -156,7 +199,7 @@ window.selectCurrentWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
-	console.log('Show just the currrent weather.');
+	// console.log('Show just the currrent weather.');
 };
 
 /////////////////// display Hourly Weather- and hide Current and One Week Weather:
@@ -168,7 +211,7 @@ window.selectHourlyWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
-	console.log('Show just the hourly weather.');
+	// console.log('Show just the hourly weather.');
 };
 
 /////////////////////// display One Week Weather- and hide Current and Hourly Weather:
@@ -178,5 +221,5 @@ window.selectWeekWeather = function () {
 		.classList.remove('hidden');
 	document.getElementById('current-weather-wrapper').classList.add('hidden');
 	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
-	console.log('Show just the weeks weather');
+	// console.log('Show just the weeks weather');
 };
