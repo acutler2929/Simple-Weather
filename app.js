@@ -2,6 +2,9 @@
 
 import config from './config.js';
 
+// Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
+// const apiKey = config.API_KEY;
+
 window.displayWeather = function () {
 	const myCity = document.getElementById('my-city').value;
 	const stateCode = document.getElementById('state-code').value;
@@ -15,7 +18,7 @@ window.displayWeather = function () {
 	///////////////////// take City, State and Country from HTML body and get coordinates...
 	async function getWeather() {
 		let response = await fetch(
-			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${config.API_KEY}`
+			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
 		);
 		const data = await response.json();
 		const myCityLat = data[0].lat;
@@ -23,7 +26,7 @@ window.displayWeather = function () {
 
 		//////////////////// send coordinates to get the weather...
 		let myWeather = await fetch(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${config.API_KEY}`
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
 		);
 		return myWeather.json();
 	}
