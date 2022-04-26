@@ -1,11 +1,11 @@
 'use strict';
 
-import config from './config.js';
+// import config from './config.js';
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
 // const apiKey = config.API_KEY;
 
-window.displayWeather = function () {
+function displayWeather() {
 	const myCity = document.getElementById('my-city').value;
 	const stateCode = document.getElementById('state-code').value;
 	const countryCode = document.getElementById('country-code').value;
@@ -36,7 +36,7 @@ window.displayWeather = function () {
 		const weatherData = await getWeather();
 		/////////////// then use weatherData to display the current weather...
 		const displayCurrWeather = function () {
-			console.log(weatherData);
+			// console.log(weatherData);
 			const currTemp = Math.trunc(
 				((weatherData.current.temp - 273.15) * 9) / 5 + 32
 			);
@@ -139,16 +139,16 @@ window.displayWeather = function () {
 		displayHourlyWeather();
 		displayWeekWeather();
 	})();
-};
+}
 
 //////////// show the nav tabs:
-window.showForecastButtons = function () {
+function showForecastButtons() {
 	document.getElementById('forecast-buttons').classList.remove('hidden');
-	console.log('Display the weather tabs.');
-};
+	// console.log('Display the weather tabs.');
+}
 
 ///////////////// DEFAULT display Current Weather- hide Hourly and One Week Weather:
-window.selectCurrentWeather = function () {
+function selectCurrentWeather() {
 	document
 		.getElementById('current-weather-wrapper')
 		.classList.remove('hidden');
@@ -156,11 +156,11 @@ window.selectCurrentWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
-	console.log('Show just the currrent weather.');
-};
+	// console.log('Show just the currrent weather.');
+}
 
 /////////////////// display Hourly Weather- and hide Current and One Week Weather:
-window.selectHourlyWeather = function () {
+function selectHourlyWeather() {
 	document
 		.getElementById('hourly-forecast-wrapper')
 		.classList.remove('hidden');
@@ -168,15 +168,37 @@ window.selectHourlyWeather = function () {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.add('hidden');
-	console.log('Show just the hourly weather.');
-};
+	// console.log('Show just the hourly weather.');
+}
 
 /////////////////////// display One Week Weather- and hide Current and Hourly Weather:
-window.selectWeekWeather = function () {
+function selectWeekWeather() {
 	document
 		.getElementById('one-week-forecast-wrapper')
 		.classList.remove('hidden');
 	document.getElementById('current-weather-wrapper').classList.add('hidden');
 	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
-	console.log('Show just the weeks weather');
-};
+	// console.log('Show just the weeks weather');
+}
+
+///////////////////// adding event listeners to the buttons:
+const getWeatherBtn = document.getElementById('get-weather-button');
+const currWeatherBtn = document.getElementById('current-weather-btn');
+const hourWeatherBtn = document.getElementById('hourly-weather-btn');
+const weekWeatherBtn = document.getElementById('week-weather-btn');
+
+getWeatherBtn.addEventListener('click', function () {
+	showForecastButtons();
+});
+getWeatherBtn.addEventListener('click', function () {
+	displayWeather();
+});
+currWeatherBtn.addEventListener('click', function () {
+	selectCurrentWeather();
+});
+hourWeatherBtn.addEventListener('click', function () {
+	selectHourlyWeather();
+});
+weekWeatherBtn.addEventListener('click', function () {
+	selectWeekWeather();
+});

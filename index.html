@@ -33,9 +33,9 @@
 						<option value="USA">USA</option>
 					</select>
 					<button
+						id="get-weather-button"
 						type="button"
 						class="buttons"
-						onclick="displayWeather(), showForecastButtons()"
 					>
 						<span>Submit</span>
 					</button>
@@ -44,24 +44,20 @@
 			<div id="forecast-buttons" class="hidden">
 				<form onsubmit="return false">
 					<button
+						id="current-weather-btn"
 						type="button"
 						class="buttons"
-						onclick="selectCurrentWeather()"
 					>
 						<span>Current</span>
 					</button>
 					<button
+						id="hourly-weather-btn"
 						type="button"
 						class="buttons"
-						onclick="selectHourlyWeather()"
 					>
 						<span>Hourly</span>
 					</button>
-					<button
-						type="button"
-						class="buttons"
-						onclick="selectWeekWeather()"
-					>
+					<button id="week-weather-btn" type="button" class="buttons">
 						<span>One Week</span>
 					</button>
 				</form>
