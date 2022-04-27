@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '../config.js';
+import config from './config.js';
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
 const apiKey = config.API_KEY;
