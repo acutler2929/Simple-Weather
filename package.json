@@ -4,7 +4,7 @@
 	"description": "Simple Weather is a minimalist weather app using the Open Weather API.",
 	"main": "app.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "nodemon server.js"
 	},
 	"author": "Alice Cutler",
 	"license": "ISC",
@@ -18,7 +18,20 @@
 	"homepage": "https://github.com/acutler1987/Simple-Weather#readme",
 	"dependencies": {
 		"body-parser": "^1.20.0",
+		"dotenv": "^16.0.0",
 		"express": "^4.18.1",
 		"request": "^2.88.2"
+	},
+	"devDependencies": {
+		"eslint": "^8.14.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.29.4",
+		"nodemon": "^2.0.16",
+		"prettier": "^2.6.2"
 	}
 }
