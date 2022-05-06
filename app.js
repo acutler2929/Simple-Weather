@@ -6,19 +6,30 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const apiKey = process.env.API_KEY;
-const port = process.env.PORT || 8888;
-const res = require('express/lib/response');
-const { json } = require('express/lib/response');
+// const apiKey = process.env.API_KEY;
+// const port = process.env.PORT || 8888;
+// const res = require('express/lib/response');
+// const { json } = require('express/lib/response');
 
 app.use(express.json());
-app.use(express.static(`${__dirname}/public`));
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/', function (req, res) {
+// app.use(express.static(`${__dirname}/public`));
+
+app.get('/', function (req, res) {
+	console.log('hello?');
 	console.log(req.body);
-	res.write('hello');
+	res.send('hello from get request!');
 });
+
+// request(`${__dirname}/public`, function (error, response, body) {
+// 	if (!error && response.statusCode == 200) {
+// 		console.log('made request to index'); // Print the google web page.
+// 	} else if (error) {
+// 		console.log(error);
+// 	}
+// });
+
 /*
 function displayWeather() {
 	app.post('/', function (req, res) {
