@@ -1,5 +1,10 @@
 'use stirct';
 
+function getWeather() {
+	console.log('getWeather has been clicked');
+	fetch('/getWeather', { method: 'GET' });
+}
+
 //////////// show the nav tabs:
 function showForecastButtons() {
 	document.getElementById('forecast-buttons').classList.remove('hidden');
@@ -53,7 +58,7 @@ getWeatherBtn.addEventListener('click', function () {
 	showForecastButtons();
 });
 getWeatherBtn.addEventListener('click', function () {
-	displayWeather();
+	getWeather();
 });
 currWeatherBtn.addEventListener('click', function () {
 	selectCurrentWeather();

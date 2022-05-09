@@ -1,18 +1,17 @@
 'use strict';
 
-// import config from './config.js';
-
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
-const apiKey = config.API_KEY;
+const apiKey = process.env.API_KEY;
 
-function displayWeather() {
-	const myCity = document.getElementById('my-city').value;
-	const stateCode = document.getElementById('state-code').value;
-	const countryCode = document.getElementById('country-code').value;
+function apiHandler() {
+	console.log('hello from apiHandler');
+	// const myCity = document.getElementById('my-city').value;
+	// const stateCode = document.getElementById('state-code').value;
+	// const countryCode = document.getElementById('country-code').value;
 	/////////// use these variables for testing:
-	// const myCity = 'kalamazoo';
-	// const stateCode = 'mi';
-	// const countryCode = 'usa';
+	const myCity = 'kalamazoo';
+	const stateCode = 'mi';
+	const countryCode = 'usa';
 	const resultLimit = 1;
 
 	///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -21,6 +20,7 @@ function displayWeather() {
 			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
 		);
 		const data = await response.json();
+		// console.log(data);
 		const myCityLat = data[0].lat;
 		const myCityLon = data[0].lon;
 
@@ -140,3 +140,5 @@ function displayWeather() {
 		displayWeekWeather();
 	})();
 }
+
+module.exports = apiHandler;
