@@ -6,19 +6,19 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// const apiKey = process.env.API_KEY;
-// const port = process.env.PORT || 8888;
+const apiKey = process.env.API_KEY;
 // const res = require('express/lib/response');
 // const { json } = require('express/lib/response');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
-// app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/', function (req, res) {
 	console.log('hello?');
-	console.log(req.body);
+	res.render('currentWeather');
 	res.send('hello from get request!');
 });
 
