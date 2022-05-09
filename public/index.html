@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
 		<link rel="stylesheet" href="style.css" />
-		<!-- <script defer type="module" src="app.js"></script> -->
+		<script defer src="public.js"></script>
 	</head>
 	<body>
 		<header>
@@ -66,26 +66,32 @@
 			</div>
 		</nav>
 		<div id="forecast-wrapper">
-			<div id="current-weather-wrapper">
-				<!-- <div id="current-weather" class="forecast-boxes">
-					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-					<img id="current-weather-img" src="${currIcon}" />
-				</div> -->
+			<div id="current-weather-wrapper" class="hidden">
+				<div id="current-weather" class="forecast-boxes">
+					<p id="current-weather-text">
+						The weather in {%MYCITY%} is currently
+						{%CURRWEATHERDESCRIPTION%} at {%CURRTEMP%} &deg;F.
+					</p>
+					<img id="current-weather-img" src="{%CURRICON%}" />
+				</div>
 			</div>
 			<div id="hourly-forecast-wrapper" class="hidden">
-				<!-- <div class="forecast-boxes hourly-forecast">
+				<div class="forecast-boxes hourly-forecast">
 					<p class="hourly-forecast-text">
-						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
+						{%HOUR%} {%HOURLYWEATHERDESCRIPTION%}<br />
+						at {%HOURLYTEMP%} &deg;F
 					</p>
-					<img class="hourly-img" src="${hourlyIcon}" />
-				</div> -->
+					<img class="hourly-img" src="{%HOURLYICON%}" />
+				</div>
 			</div>
 			<div id="one-week-forecast-wrapper" class="hidden">
-				<!-- <div class="forecast-boxes one-week-forecast">
+				<div class="forecast-boxes one-week-forecast">
 					<p class="one-week-forecast-text">
-					${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-					<img class="one-week-img" src="${weekIcon}" />
-				</div> -->
+						{%DAYOFWEEK%} {%WEEKWEATHERDESCRIPTION%}<br />
+						at {%DAYTEMPHIGH%} / {%DAYTEMPLOW%} &deg;F
+					</p>
+					<img class="one-week-img" src="{%WEEKICON%}" />
+				</div>
 			</div>
 		</div>
 	</body>
