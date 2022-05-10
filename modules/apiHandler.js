@@ -1,5 +1,7 @@
 'use strict';
 
+const request = require('request');
+
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
 const apiKey = process.env.API_KEY;
 
@@ -14,19 +16,39 @@ function apiHandler() {
 	const countryCode = 'usa';
 	const resultLimit = 1;
 
-	///////////////////// take City, State and Country from HTML body and get coordinates...
 	async function getWeather() {
-		let response = await fetch(
-			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
+		let response;
+		///////////////////// take City, State and Country from HTML body and get coordinates...
+		response = await request(
+			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`,
+			{ json: true },
+			(err, res, body) => {
+				if (err) {
+					console.log('hello from api error');
+					return console.log(err);
+				}
+				console.log('hello from api call');
+				console.log(res);
+				return res;
+			}
 		);
-		const data = await response.json();
-		// console.log(data);
-		const myCityLat = data[0].lat;
-		const myCityLon = data[0].lon;
+		setTimeout(5000);
+		// console.log(json.parse(response));
+
+		// const myCityLat = res[0].lat;
+		// const myCityLon = res[0].lon;
 
 		//////////////////// send coordinates to get the weather...
-		let myWeather = await fetch(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
+		request(
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`,
+			{ json: true },
+			(err, res, body) => {
+				if (err) {
+					return console.log(err);
+				}
+				console.log(body);
+				return body;
+			}
 		);
 		return myWeather.json();
 	}
