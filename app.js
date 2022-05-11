@@ -6,16 +6,19 @@ import config from './config.js';
 const apiKey = config.API_KEY;
 
 function displayWeather() {
-	const myCity = document.getElementById('my-city').value;
-	const stateCode = document.getElementById('state-code').value;
-	const countryCode = document.getElementById('country-code').value;
+	/////////// use these variables when live:
+	// const myCity = document.getElementById('my-city').value;
+	// const stateCode = document.getElementById('state-code').value;
+	// const countryCode = document.getElementById('country-code').value;
+	// const resultLimit = 1;
+
 	/////////// use these variables for testing:
-	// const myCity = 'kalamazoo';
-	// const stateCode = 'mi';
-	// const countryCode = 'usa';
+	const myCity = 'kalamazoo';
+	const stateCode = 'mi';
+	const countryCode = 'usa';
 	const resultLimit = 1;
 
-	///////////////////// take City, State and Country from HTML body and get coordinates...
+	///////////////////// first, we take City, State and Country from HTML body and get coordinates...
 	async function getWeather() {
 		let response = await fetch(
 			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
@@ -24,7 +27,7 @@ function displayWeather() {
 		const myCityLat = data[0].lat;
 		const myCityLon = data[0].lon;
 
-		//////////////////// send coordinates to get the weather...
+		//////////////////// then we send coordinates to get the weather...
 		let myWeather = await fetch(
 			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
 		);
@@ -74,7 +77,6 @@ function displayWeather() {
 				const hourlyTemp = Math.trunc(
 					((hourArray[i].temp - 273.15) * 9) / 5 + 32
 				);
-				console.log(typeof hourlyTemp);
 				const hourlyWeatherDescription =
 					hourArray[i].weather[0].description;
 				const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
@@ -141,7 +143,7 @@ function displayWeather() {
 	})();
 }
 
-//////////// show the nav tabs:
+//////////// press Submit to show the nav tabs:
 function showForecastButtons() {
 	document.getElementById('forecast-buttons').classList.remove('hidden');
 	// console.log('Display the weather tabs.');
