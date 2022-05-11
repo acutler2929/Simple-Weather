@@ -1,9 +1,10 @@
 'use strict';
 
-const request = require('request');
+const axios = require('axios');
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
 const apiKey = process.env.API_KEY;
+console.log(apiKey);
 
 function apiHandler() {
 	console.log('hello from apiHandler');
@@ -16,49 +17,55 @@ function apiHandler() {
 	const countryCode = 'usa';
 	const resultLimit = 1;
 
-	async function getWeather() {
-		let response;
-		///////////////////// take City, State and Country from HTML body and get coordinates...
-		response = await request(
-			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`,
-			{ json: true },
-			(err, res, body) => {
-				if (err) {
-					console.log('hello from api error');
-					return console.log(err);
-				}
-				console.log('hello from api call');
-				console.log(res);
-				return res;
-			}
-		);
-		setTimeout(5000);
-		// console.log(json.parse(response));
+	let weatherData;
 
-		// const myCityLat = res[0].lat;
-		// const myCityLon = res[0].lon;
+	async function getWeather() {
+		///////////////////// take City, State and Country from HTML body and get coordinates...
+		let geoData;
+		await axios
+			.get(
+				`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
+			)
+			.then((res) => {
+				geoData = res.data;
+
+				console.log(geoData);
+				console.log(geoData[0].name);
+
+				return geoData;
+			})
+			.catch((err) => {
+				console.log('Error: ', err.message);
+			});
+
+		const myCityLat = geoData[0].lat;
+		const myCityLon = geoData[0].lon;
+		console.log(myCityLat);
+		console.log(myCityLon);
 
 		//////////////////// send coordinates to get the weather...
-		request(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`,
-			{ json: true },
-			(err, res, body) => {
-				if (err) {
-					return console.log(err);
-				}
-				console.log(body);
-				return body;
-			}
-		);
-		return myWeather.json();
+		await axios
+			.get(
+				`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
+			)
+			.then((res) => {
+				weatherData = res.data;
+				console.log(weatherData.current.weather[0].description);
+				return weatherData;
+			})
+			.catch((err) => {
+				console.log('Error: ', err.message);
+			});
 	}
+
+	console.log(weatherData.current.weather[0].description);
 
 	////////////////////////// first, wait for getWeather to finish executing:
 	(async () => {
 		const weatherData = await getWeather();
 		/////////////// then use weatherData to display the current weather...
 		const displayCurrWeather = function () {
-			// console.log(weatherData);
+			console.log(weatherData.current.weather[0].description);
 			const currTemp = Math.trunc(
 				((weatherData.current.temp - 273.15) * 9) / 5 + 32
 			);
@@ -163,4 +170,4 @@ function apiHandler() {
 	})();
 }
 
-module.exports = apiHandler;
+module.exports = apiHandler();
