@@ -6,7 +6,7 @@ const axios = require('axios');
 const apiKey = process.env.API_KEY;
 console.log(apiKey);
 
-function apiHandler() {
+async function apiHandler() {
 	console.log('hello from apiHandler');
 	// const myCity = document.getElementById('my-city').value;
 	// const stateCode = document.getElementById('state-code').value;
@@ -56,36 +56,21 @@ function apiHandler() {
 			.catch((err) => {
 				console.log('Error: ', err.message);
 			});
+		return weatherData;
 	}
 
-	console.log(weatherData.current.weather[0].description);
-
-	////////////////////////// first, wait for getWeather to finish executing:
-	(async () => {
+	async function displayWeather() {
+		////////////////////////// first, wait for getWeather to finish executing:
 		const weatherData = await getWeather();
+		console.log(weatherData.current.weather[0].description);
 		/////////////// then use weatherData to display the current weather...
 		const displayCurrWeather = function () {
-			console.log(weatherData.current.weather[0].description);
 			const currTemp = Math.trunc(
 				((weatherData.current.temp - 273.15) * 9) / 5 + 32
 			);
 			const currWeatherDescription =
 				weatherData.current.weather[0].description;
 			const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
-
-			const currentHtml = `
-				<div id="current-weather" class="forecast-boxes">
-					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-					<img id="current-weather-img" src="${currIcon}" />
-				</div>
-			`;
-
-			document
-				.getElementById('current-weather-wrapper')
-				.insertAdjacentHTML('afterbegin', currentHtml);
-			document
-				.getElementById('current-weather')
-				.classList.remove('hidden');
 		};
 
 		//////////////// then display the 24-hour weather...
@@ -103,23 +88,10 @@ function apiHandler() {
 				const hourlyTemp = Math.trunc(
 					((hourArray[i].temp - 273.15) * 9) / 5 + 32
 				);
-				console.log(typeof hourlyTemp);
+
 				const hourlyWeatherDescription =
 					hourArray[i].weather[0].description;
 				const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
-
-				const hourlyHtml = `
-					<div class="forecast-boxes hourly-forecast">
-						<p class="hourly-forecast-text">
-						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
-						</p>
-						<img class="hourly-img" src="${hourlyIcon}" />
-					</div>
-				`;
-
-				document
-					.getElementById('hourly-forecast-wrapper')
-					.insertAdjacentHTML('afterbegin', hourlyHtml);
 			});
 		};
 
@@ -135,8 +107,6 @@ function apiHandler() {
 					'en-US',
 					{ weekday: 'long' }
 				);
-				// console.log(dayTimeStamp);
-				// console.log(dayOfWeek);
 
 				const dayTempHigh = Math.trunc(
 					((weekArray[i].temp.max - 273.15) * 9) / 5 + 32
@@ -149,25 +119,17 @@ function apiHandler() {
 				const weekWeatherDescription =
 					weekArray[i].weather[0].description;
 				const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
-
-				const weekHtml = `
-					<div class="forecast-boxes one-week-forecast">
-						<p class="one-week-forecast-text">
-						${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-						<img class="one-week-img" src="${weekIcon}" />
-					</div>
-				`;
-
-				document
-					.getElementById('one-week-forecast-wrapper')
-					.insertAdjacentHTML('afterbegin', weekHtml);
 			});
 		};
 
 		displayCurrWeather();
 		displayHourlyWeather();
 		displayWeekWeather();
-	})();
+	}
+	// getWeather();
+	displayWeather();
 }
 
-module.exports = apiHandler();
+// apiHandler();
+
+module.exports = apiHandler;
