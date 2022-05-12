@@ -1,10 +1,13 @@
 'use strict';
 
 const axios = require('axios');
+const app = require('../app');
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
 const apiKey = process.env.API_KEY;
 console.log(apiKey);
+
+let weatherData;
 
 async function apiHandler() {
 	console.log('hello from apiHandler');
@@ -17,7 +20,7 @@ async function apiHandler() {
 	const countryCode = 'usa';
 	const resultLimit = 1;
 
-	let weatherData;
+	// let weatherData;
 
 	async function getWeather() {
 		///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -29,7 +32,7 @@ async function apiHandler() {
 			.then((res) => {
 				geoData = res.data;
 
-				console.log(geoData);
+				// console.log(geoData);
 				console.log(geoData[0].name);
 
 				return geoData;
@@ -50,7 +53,7 @@ async function apiHandler() {
 			)
 			.then((res) => {
 				weatherData = res.data;
-				console.log(weatherData.current.weather[0].description);
+				// console.log(weatherData.current.weather[0].description);
 				return weatherData;
 			})
 			.catch((err) => {
@@ -120,16 +123,34 @@ async function apiHandler() {
 					weekArray[i].weather[0].description;
 				const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
 			});
+			return weatherData;
 		};
 
 		displayCurrWeather();
 		displayHourlyWeather();
 		displayWeekWeather();
+
+		module.exports.weatherData = weatherData;
+
+		return weatherData;
 	}
 	// getWeather();
 	displayWeather();
+
+	// fetch('/getWeather', {
+	// 	method: 'POST',
+	// 	headers: { 'Content-Type': 'application/json' },
+	// 	body: weatherData,
+	// });
+
+	return weatherData;
 }
+
+// console.log('hello from line 140 apiHandler');
+// console.log(weatherData);
 
 // apiHandler();
 
-module.exports = apiHandler;
+// module.exports = weatherData;
+
+module.exports = { apiHandler, weatherData };
