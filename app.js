@@ -3,20 +3,23 @@
 import config from './config.js';
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
-const apiKey = config.API_KEY;
+// const apiKey = config.API_KEY;
+
+// Yes, this is naughty of me, I will change this soon.
+const apiKey = '91ca527d2cf1f1be56b41abd6b37520b';
 
 function displayWeather() {
 	/////////// use these variables when live:
-	// const myCity = document.getElementById('my-city').value;
-	// const stateCode = document.getElementById('state-code').value;
-	// const countryCode = document.getElementById('country-code').value;
-	// const resultLimit = 1;
+	const myCity = document.getElementById('my-city').value;
+	const stateCode = document.getElementById('state-code').value;
+	const countryCode = document.getElementById('country-code').value;
+	const resultLimit = 1;
 
 	/////////// use these variables for testing:
-	const myCity = 'kalamazoo';
-	const stateCode = 'mi';
-	const countryCode = 'usa';
-	const resultLimit = 1;
+	// const myCity = 'kalamazoo';
+	// const stateCode = 'mi';
+	// const countryCode = 'usa';
+	// const resultLimit = 1;
 
 	///////////////////// first, we take City, State and Country from HTML body and get coordinates...
 	async function getWeather() {
