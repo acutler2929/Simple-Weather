@@ -61,9 +61,9 @@ async function getWeather() {
 			console.log('Error: ', err.message);
 		});
 
-	console.log(
-		`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
-	); // <--- WHY IS THIS NOT WORKING
+	// console.log(
+	// 	`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
+	// ); <--- WHY IS THIS NOT WORKING
 
 	return weatherData;
 }
