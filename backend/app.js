@@ -4,10 +4,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const apiHandler = require('./modules/apiHandler');
-const insertWeather = require('./modules/insertWeather');
+// const insertWeather = require('./modules/insertWeather');
 // const example = require('./example');
 
 const app = express();
+
+// const myCity = 'kalamazoo';
+// const stateCode = 'mi';
+// const countryCode = 'usa';
 
 console.log('hello from app.js!');
 
@@ -19,30 +23,21 @@ app.use(express.static('../frontend'));
 
 // console.log(example.fName);
 
-app.get('/getWeather', async (req, res) => {
+app.post('/getWeather', async (req, res) => {
 	console.log('hello from app.js => getWeather!');
+	console.log(req.body);
 
-	await app.get(apiHandler.getWeather());
-	// const weatherData = await apiHandler.weatherData;
-	console.log(apiHandler.weatherData);
-	console.log(apiHandler.weatherGreeting);
-	console.log(apiHandler.dataPhrase);
-	// console.log(
-	// 	`weatherData ${weatherData.current.weather[0].description} has been returned from apiHandler`
-	// );
+	const weatherData = await apiHandler.getWeather(
+		req.body.myCity,
+		req.body.stateCode,
+		req.body.countryCode
+	);
+	console.log(weatherData.current);
+	const dataPhrase = `it is currently ${weatherData.current.weather[0].description} in ${req.body.myCity}, ${req.body.stateCode}`;
+	console.log(dataPhrase);
+
 	// return weatherData;
 });
-
-// app.get('/getWeather', (req, res) => {
-// 	console.log('hello from app.js => getWeather!');
-// 	app.get(apiHandler.apiHandler());
-// 	const weatherData = apiHandler.weatherData;
-// }).then(
-// 	console.log(
-// 		`weatherData ${weatherData.current.weather[0].description} has been returned from apiHandler`
-// 	)
-// );
-// return weatherData;);
 
 // app.post('/insertWeather', (req, res) => {
 // 	// console.log(req.body);

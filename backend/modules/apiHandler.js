@@ -12,26 +12,22 @@ console.log('hello from apiHandler');
 // const stateCode = document.getElementById('state-code').value;
 // const countryCode = document.getElementById('country-code').value;
 /////////// use these variables for testing:
-const myCity = 'kalamazoo';
-const stateCode = 'mi';
-const countryCode = 'usa';
+// const myCity = 'kalamazoo';
+// const stateCode = 'mi';
+// const countryCode = 'usa';
+
 const resultLimit = 1;
 
-let weatherData;
-let dataPhrase;
-
-async function getWeather() {
+exports.getWeather = async function (city, state, country) {
 	///////////////////// take City, State and Country from HTML body and get coordinates...
+	let weatherData;
 	let geoData;
 	await axios
 		.get(
-			`http://api.openweathermap.org/geo/1.0/direct?q=${myCity},${stateCode},${countryCode}&limit=${resultLimit}&appid=${apiKey}`
+			`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=${resultLimit}&appid=${apiKey}`
 		)
 		.then((res) => {
 			geoData = res.data;
-
-			// console.log(geoData);
-			// console.log(geoData[0].name);
 
 			return geoData;
 		})
@@ -41,8 +37,6 @@ async function getWeather() {
 
 	const myCityLat = geoData[0].lat;
 	const myCityLon = geoData[0].lon;
-	// console.log(myCityLat);
-	// console.log(myCityLon);
 
 	//////////////////// send coordinates to get the weather...
 	await axios
@@ -60,20 +54,8 @@ async function getWeather() {
 			console.log('Error: ', err.message);
 		});
 
-	dataPhrase = `it is currently ${weatherData.current.weather[0].description} in ${myCity}`;
-
-	// console.log(
-	// 	`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
-	// ); <--- WHY IS THIS NOT WORKING
-
 	return weatherData;
-}
-
-// console.log(dataPhrase); // <-- undefined before axios call
-
-const weatherGreeting = 'This should have been weatherData';
-
-module.exports = { getWeather, weatherData, weatherGreeting, dataPhrase };
+};
 
 // async function displayWeather() {
 // 	////////////////////////// first, wait for getWeather to finish executing:
