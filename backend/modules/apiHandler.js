@@ -7,8 +7,6 @@ const app = require('../app');
 const apiKey = process.env.API_KEY;
 // console.log(apiKey);
 
-let weatherData;
-
 console.log('hello from apiHandler');
 // const myCity = document.getElementById('my-city').value;
 // const stateCode = document.getElementById('state-code').value;
@@ -19,7 +17,8 @@ const stateCode = 'mi';
 const countryCode = 'usa';
 const resultLimit = 1;
 
-// let weatherData;
+let weatherData;
+let dataPhrase;
 
 async function getWeather() {
 	///////////////////// take City, State and Country from HTML body and get coordinates...
@@ -46,7 +45,7 @@ async function getWeather() {
 	// console.log(myCityLon);
 
 	//////////////////// send coordinates to get the weather...
-	axios
+	await axios
 		.get(
 			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
 		)
@@ -61,6 +60,8 @@ async function getWeather() {
 			console.log('Error: ', err.message);
 		});
 
+	dataPhrase = `it is currently ${weatherData.current.weather[0].description} in ${myCity}`;
+
 	// console.log(
 	// 	`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
 	// ); <--- WHY IS THIS NOT WORKING
@@ -68,9 +69,11 @@ async function getWeather() {
 	return weatherData;
 }
 
+// console.log(dataPhrase); // <-- undefined before axios call
+
 const weatherGreeting = 'This should have been weatherData';
 
-module.exports = { getWeather, weatherData, weatherGreeting };
+module.exports = { getWeather, weatherData, weatherGreeting, dataPhrase };
 
 // async function displayWeather() {
 // 	////////////////////////// first, wait for getWeather to finish executing:

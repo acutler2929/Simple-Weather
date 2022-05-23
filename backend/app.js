@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const apiHandler = require('./modules/apiHandler');
 const insertWeather = require('./modules/insertWeather');
-const example = require('./example');
+// const example = require('./example');
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('../frontend'));
 
-console.log(example.fName);
+// console.log(example.fName);
 
 app.get('/getWeather', async (req, res) => {
 	console.log('hello from app.js => getWeather!');
@@ -26,6 +26,7 @@ app.get('/getWeather', async (req, res) => {
 	// const weatherData = await apiHandler.weatherData;
 	console.log(apiHandler.weatherData);
 	console.log(apiHandler.weatherGreeting);
+	console.log(apiHandler.dataPhrase);
 	// console.log(
 	// 	`weatherData ${weatherData.current.weather[0].description} has been returned from apiHandler`
 	// );
