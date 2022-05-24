@@ -1,13 +1,9 @@
-let fName;
+'use strict';
 
-function getName() {
-	console.log('getName() called');
-	fName = 'alice';
-	return fName;
-}
+const hourTimeStamp = 1653418800,
+	hour = new Date(hourTimeStamp * 1000).toLocaleString('en-US', {
+		hour: 'numeric',
+		hour12: true,
+	});
 
-getName();
-
-// console.log(fName);
-
-module.exports = { getName, fName };
+module.exports = { hourTimeStamp, hour };

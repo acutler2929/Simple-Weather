@@ -170,17 +170,17 @@ function insertWeatherData(weatherData) {
 
 //////////// click on submit, and grab weatherData from API call...
 async function getWeather() {
-	const requestBody = {
-		myCity: document.getElementById('my-city').value,
-		stateCode: document.getElementById('state-code').value,
-		countryCode: document.getElementById('country-code').value,
-	};
-	/////////// use this requestBody object for testing:
 	// const requestBody = {
-	// 	myCity: 'kalamazoo',
-	// 	stateCode: 'mi',
-	// 	countryCode: 'usa',
+	// 	myCity: document.getElementById('my-city').value,
+	// 	stateCode: document.getElementById('state-code').value,
+	// 	countryCode: document.getElementById('country-code').value,
 	// };
+	/////////// use this requestBody object for testing:
+	const requestBody = {
+		myCity: 'kalamazoo',
+		stateCode: 'mi',
+		countryCode: 'usa',
+	};
 	console.log(requestBody);
 	console.log('getWeather has been clicked');
 	await fetch('/getWeather', {
