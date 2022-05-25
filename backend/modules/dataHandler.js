@@ -15,17 +15,30 @@ exports.insertWeather = async function (weatherData) {
 	// console.log(currWeatherDescription); // <-- works just fine
 
 	// for some reason the hourly data comes to us in reverse order, so I just unreverse it:
-	const hourArray = weatherData.hourly.slice(0, 12).reverse();
+	const hourArray = weatherData.hourly.slice(0, 12);
 	// console.log(hourArray);
+	let hourTimeStamp = [];
+	let hour = [];
+	let hourlyWeatherDescription = [];
+	let hourlyTemp = [];
+	let hourlyIcon = [];
+	let hourlyHtml = [];
 
+	// await hourArray.forEach((data) => {
+	// 	hourTimeStamp.push(data.dt);
+	// 	hour.push(
+	// 		new Date(hourTimeStamp * 1000).toLocaleString('en-US', {
+	// 			hour: 'numeric',
+	// 			hour12: true,
+	// 		})
+	// 	);
+	// });
+	// console.log(hourTimeStamp);
+	// console.log(hour);
 	// inserts for HOURLY weather
-	const hourData = await hourArray.forEach((data, i) => {
-		let hourTimeStamp = [];
-		let hour = [];
-		let hourlyWeatherDescription = [];
-		let hourlyTemp = [];
-		let hourlyIcon = [];
-		let hourlyHtml = [];
+	// let hourData = {};
+	await hourArray.forEach((data) => {
+		// console.log(data);
 		hourTimeStamp.push(data.dt);
 		hour.push(
 			new Date(hourTimeStamp * 1000).toLocaleString('en-US', {
@@ -46,21 +59,30 @@ exports.insertWeather = async function (weatherData) {
 				<img class="hourly-img" src="${hourlyIcon}" />
 			</div>
 		`);
+
+		// return (hourData = {
+		// 	hour,
+		// 	hourlyWeatherDescription,
+		// 	hourlyTemp,
+		// 	hourlyIcon,
+		// 	hourlyHtml,
+		// });
 	});
 	// .then(console.log(hourData.hourTimeStamp));
 
 	// for some reason the weeks data comes to us in reverse order, so I just unreverse it:
-	const weekArray = weatherData.daily.reverse();
+	const weekArray = weatherData.daily;
+	let dayTimeStamp = [];
+	let dayOfWeek = [];
+	let weekWeatherDescription = [];
+	let dayTempHigh = [];
+	let dayTempLow = [];
+	let weekIcon = [];
+	let weekHtml = [];
 
 	// inserts for ONE WEEK weather
-	const weekData = await weekArray.forEach((data, i) => {
-		let dayTimeStamp = [];
-		let dayOfWeek = [];
-		let weekWeatherDescription = [];
-		let dayTempHigh = [];
-		let dayTempLow = [];
-		let weekIcon = [];
-		let weekHtml = [];
+	// let weekData = {};
+	await weekArray.forEach((data, i) => {
 		dayTimeStamp.push(data.dt);
 		dayOfWeek.push(
 			new Date(dayTimeStamp * 1000).toLocaleString('en-US', {
@@ -80,6 +102,15 @@ exports.insertWeather = async function (weatherData) {
 			<img class="one-week-img" src="${weekIcon}" />
 		</div>
 	`);
+
+		// return (weekData = {
+		// 	dayOfWeek,
+		// 	weekWeatherDescription,
+		// 	dayTempHigh,
+		// 	dayTempLow,
+		// 	weekIcon,
+		// 	weekHtml,
+		// });
 	});
 
 	// RETURN the whole thing as an object
@@ -88,8 +119,9 @@ exports.insertWeather = async function (weatherData) {
 		currWeatherDescription,
 		currTemp,
 		currIcon,
-		hourData,
-		weekData,
+		hourTimeStamp,
+		hour,
+		dayOfWeek,
 	};
 };
 

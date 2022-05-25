@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const apiHandler = require('./modules/apiHandler');
 const dataHandler = require('./modules/dataHandler');
-// const example = require('./example');
+const example = require('./example');
 // console.log(example.hour);
 
 const app = express();
