@@ -37,11 +37,11 @@ exports.insertWeather = async function (weatherData) {
 	// console.log(hour);
 	// inserts for HOURLY weather
 	// let hourData = {};
-	await hourArray.forEach((data) => {
+	await hourArray.forEach((data, i) => {
 		// console.log(data);
 		hourTimeStamp.push(data.dt);
 		hour.push(
-			new Date(hourTimeStamp * 1000).toLocaleString('en-US', {
+			new Date(hourTimeStamp[i] * 1000).toLocaleString('en-US', {
 				hour: 'numeric',
 				hour12: true,
 			})
@@ -85,7 +85,7 @@ exports.insertWeather = async function (weatherData) {
 	await weekArray.forEach((data, i) => {
 		dayTimeStamp.push(data.dt);
 		dayOfWeek.push(
-			new Date(dayTimeStamp * 1000).toLocaleString('en-US', {
+			new Date(dayTimeStamp[i] * 1000).toLocaleString('en-US', {
 				weekday: 'long',
 			})
 		);
