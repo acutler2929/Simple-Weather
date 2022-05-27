@@ -7,14 +7,7 @@ const app = require('../app');
 const apiKey = process.env.API_KEY;
 // console.log(apiKey);
 
-console.log('hello from apiHandler');
-// const myCity = document.getElementById('my-city').value;
-// const stateCode = document.getElementById('state-code').value;
-// const countryCode = document.getElementById('country-code').value;
-/////////// use these variables for testing:
-// const myCity = 'kalamazoo';
-// const stateCode = 'mi';
-// const countryCode = 'usa';
+console.log('hello from apiHandler!');
 
 const resultLimit = 1;
 
@@ -45,9 +38,9 @@ exports.getWeather = async function (city, state, country) {
 		)
 		.then((res) => {
 			weatherData = res.data;
-			console.log(
-				`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
-			);
+			// console.log(
+			// 	`weatherData ${weatherData.current.weather[0].description} has been grabbed from API by apiHandler`
+			// );
 			return weatherData;
 		})
 		.catch((err) => {
@@ -56,71 +49,3 @@ exports.getWeather = async function (city, state, country) {
 
 	return weatherData;
 };
-
-// async function displayWeather() {
-// 	////////////////////////// first, wait for getWeather to finish executing:
-// 	const weatherData = await getWeather();
-// 	// console.log(weatherData.current.weather[0].description);
-// 	/////////////// then use weatherData to display the current weather...
-// 	const displayCurrWeather = function () {
-// 		const currTemp = Math.trunc(
-// 			((weatherData.current.temp - 273.15) * 9) / 5 + 32
-// 		);
-// 		const currWeatherDescription =
-// 			weatherData.current.weather[0].description;
-// 		const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
-// 	};
-
-// 	//////////////// then display the 24-hour weather...
-// 	const displayHourlyWeather = function () {
-// 		// for some reason the hourly data comes to us in reverse order, so I just unreverse it:
-// 		const hourArray = weatherData.hourly.slice(0, 12).reverse();
-
-// 		hourArray.forEach((data, i) => {
-// 			const hourTimeStamp = hourArray[i].dt;
-// 			const hour = new Date(hourTimeStamp * 1000).toLocaleString(
-// 				'en-US',
-// 				{ hour: 'numeric', hour12: true }
-// 			);
-
-// 			const hourlyTemp = Math.trunc(
-// 				((hourArray[i].temp - 273.15) * 9) / 5 + 32
-// 			);
-
-// 			const hourlyWeatherDescription =
-// 				hourArray[i].weather[0].description;
-// 			const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
-// 		});
-// 	};
-
-// 	///////////////// and finally display the weather for the week...
-// 	const displayWeekWeather = function () {
-// 		// for some reason the weeks data comes to us in reverse order, so I just unreverse it:
-// 		const weekArray = weatherData.daily.reverse();
-
-// 		weekArray.forEach((data, i) => {
-// 			const dayTimeStamp = weekArray[i].dt;
-
-// 			const dayOfWeek = new Date(dayTimeStamp * 1000).toLocaleString(
-// 				'en-US',
-// 				{ weekday: 'long' }
-// 			);
-
-// 			const dayTempHigh = Math.trunc(
-// 				((weekArray[i].temp.max - 273.15) * 9) / 5 + 32
-// 			);
-
-// 			const dayTempLow = Math.trunc(
-// 				((weekArray[i].temp.min - 273.15) * 9) / 5 + 32
-// 			);
-
-// 			const weekWeatherDescription =
-// 				weekArray[i].weather[0].description;
-// 			const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
-// 		});
-// 		return weatherData;
-// 	};
-
-// 	displayCurrWeather();
-// 	displayHourlyWeather();
-// 	displayWeekWeather();
