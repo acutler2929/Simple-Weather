@@ -1,4 +1,4 @@
-// const weatherData = require('./apiHandler');
+'use strict';
 
 console.log('hello from insertWeather!');
 
@@ -68,25 +68,9 @@ exports.insertWeather = async function (apiResponse) {
 			`);
 
 			return hourlyHtml;
-
-			// return {
-			// 	hour,
-			// 	hourlyWeatherDescription,
-			// 	hourlyTemp,
-			// 	hourlyIcon,
-			// 	hourlyHtml,
-			// };
 		});
 
 		return hourlyHtml;
-
-		// return {
-		// 	hour,
-		// 	hourlyWeatherDescription,
-		// 	hourlyTemp,
-		// 	hourlyIcon,
-		// 	hourlyHtml,
-		// };
 	}
 
 	async function getWeekData(data) {
@@ -126,27 +110,9 @@ exports.insertWeather = async function (apiResponse) {
 			`);
 
 			return weekHtml;
-
-			// return {
-			// 	dayOfWeek,
-			// 	weekWeatherDescription,
-			// 	dayTempHigh,
-			// 	dayTempLow,
-			// 	weekIcon,
-			// 	weekHtml,
-			// };
 		});
 
 		return weekHtml;
-
-		// return {
-		// 	dayOfWeek,
-		// 	weekWeatherDescription,
-		// 	dayTempHigh,
-		// 	dayTempLow,
-		// 	weekIcon,
-		// 	weekHtml,
-		// };
 	}
 
 	const currData = await getCurrData(apiResponse);

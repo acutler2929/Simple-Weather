@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 
 const apiHandler = require('./modules/apiHandler');
 const dataHandler = require('./modules/dataHandler');
-// const example = require('./example');
-// console.log(example.hour);
 
 const app = express();
 
@@ -36,10 +34,6 @@ app.post('/getWeather', async (req, res) => {
 
 	// then we send apiResponse to dataHandler.js- htmlInserts come back from dataHandler.js and are then sent to the frontend client.js:
 	const htmlInserts = await dataHandler.insertWeather(apiResponse);
-	// console.log(
-	// 	`it is currently ${htmlInserts.currData.currWeatherDescription}`
-	// );
-	// console.log(htmlInserts);
 
 	res.send(htmlInserts);
 });
