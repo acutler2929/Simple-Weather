@@ -14,7 +14,9 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-app.use(express.static('../frontend'));
+app.use(express.static('frontend'));
+
+console.log(__dirname);
 
 // First, location data is sent from frontend client.js to app.js, and location data is sent to apiHandler.js to make the api calls:
 app.post('/getWeather', async (req, res) => {
