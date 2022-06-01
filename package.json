@@ -4,7 +4,7 @@
 	"description": "Simple Weather is a minimalist weather app using the Open Weather API.",
 	"main": "app.js",
 	"scripts": {
-		"start": "nodemon server.js"
+		"start": "nodemon backend/server.js"
 	},
 	"author": "Alice Cutler",
 	"license": "ISC",
