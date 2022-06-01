@@ -2,40 +2,47 @@
 
 console.log('hello from insertWeather!');
 
-exports.insertWeather = async function (weatherData) {
+exports.insertWeather = async function (apiResponse) {
 	console.log('function insertWeather called...');
 
 	async function getCurrData(data) {
 		// inserts for CURRENT weather
-		const currWeatherDescription = data.current.weather[0].description,
-			currTemp = Math.trunc(((data.current.temp - 273.15) * 9) / 5 + 32),
-			currIcon = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+		const currWeatherDescription =
+				data.weatherData.current.weather[0].description,
+			currTemp = Math.trunc(
+				((data.weatherData.current.temp - 273.15) * 9) / 5 + 32
+			),
+			currIcon = `http://openweathermap.org/img/wn/${data.weatherData.current.weather[0].icon}@2x.png`,
+			myCity = data.locationData.myCity,
+			currHtml = `
+			<div id="current-weather" class="forecast-boxes">
+				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
+				<img id="current-weather-img" src="${currIcon}" />
+			</div>
+			`;
 
 		// console.log(currWeatherDescription); // <-- works just fine
 
-		return {
-			currWeatherDescription,
-			currTemp,
-			currIcon,
-		};
+		return currHtml;
+
+		// return {
+		// 	currWeatherDescription,
+		// 	currTemp,
+		// 	currIcon,
+		// 	myCity,
+		// 	currHtml,
+		// };
 	}
 
 	async function getHourData(data) {
-		const hourArray = data.hourly.slice(0, 12);
+		const hourArray = data.weatherData.hourly.slice(0, 12);
 		// console.log(hourArray);
 		let hourTimeStamp = [];
 		let hour = [];
 		let hourlyWeatherDescription = [];
 		let hourlyTemp = [];
 		let hourlyIcon = [];
-		let hourlyHtml = `
-			<div class="forecast-boxes hourly-forecast">
-				<p class="hourly-forecast-text">
-					${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
-				</p>
-				<img class="hourly-img" src="${hourlyIcon}" />
-			</div>
-		`;
+		let hourlyHtml = [];
 
 		await hourArray.forEach((data, i) => {
 			// console.log(data);
@@ -51,40 +58,46 @@ exports.insertWeather = async function (weatherData) {
 			hourlyIcon.push(
 				`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 			);
+			hourlyHtml.push(`
+				<div class="forecast-boxes hourly-forecast">
+					<p class="hourly-forecast-text">
+						${hour[i]} ${hourlyWeatherDescription[i]}<br> at ${hourlyTemp[i]} &deg;F
+					</p>
+					<img class="hourly-img" src="${hourlyIcon[i]}" />
+				</div>
+			`);
 
-			return {
-				hour,
-				hourlyWeatherDescription,
-				hourlyTemp,
-				hourlyIcon,
-				hourlyHtml,
-			};
+			return hourlyHtml;
+
+			// return {
+			// 	hour,
+			// 	hourlyWeatherDescription,
+			// 	hourlyTemp,
+			// 	hourlyIcon,
+			// 	hourlyHtml,
+			// };
 		});
 
-		return {
-			hour,
-			hourlyWeatherDescription,
-			hourlyTemp,
-			hourlyIcon,
-			hourlyHtml,
-		};
+		return hourlyHtml;
+
+		// return {
+		// 	hour,
+		// 	hourlyWeatherDescription,
+		// 	hourlyTemp,
+		// 	hourlyIcon,
+		// 	hourlyHtml,
+		// };
 	}
 
 	async function getWeekData(data) {
-		const weekArray = data.daily;
+		const weekArray = data.weatherData.daily;
 		let dayTimeStamp = [];
 		let dayOfWeek = [];
 		let weekWeatherDescription = [];
 		let dayTempHigh = [];
 		let dayTempLow = [];
 		let weekIcon = [];
-		let weekHtml = `
-			<div class="forecast-boxes one-week-forecast">
-				<p class="one-week-forecast-text">
-					${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-				<img class="one-week-img" src="${weekIcon}" />
-			</div>
-		`;
+		let weekHtml = [];
 
 		// inserts for ONE WEEK weather
 		await weekArray.forEach((data, i) => {
@@ -104,30 +117,41 @@ exports.insertWeather = async function (weatherData) {
 			weekIcon.push(
 				`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 			);
+			weekHtml.push(`
+				<div class="forecast-boxes one-week-forecast">
+					<p class="one-week-forecast-text">
+						${dayOfWeek[i]} ${weekWeatherDescription[i]}<br> at ${dayTempHigh[i]} / ${dayTempLow[i]} &deg;F</p>
+					<img class="one-week-img" src="${weekIcon[i]}" />
+				</div>
+			`);
 
-			return {
-				dayOfWeek,
-				weekWeatherDescription,
-				dayTempHigh,
-				dayTempLow,
-				weekIcon,
-				weekHtml,
-			};
+			return weekHtml;
+
+			// return {
+			// 	dayOfWeek,
+			// 	weekWeatherDescription,
+			// 	dayTempHigh,
+			// 	dayTempLow,
+			// 	weekIcon,
+			// 	weekHtml,
+			// };
 		});
 
-		return {
-			dayOfWeek,
-			weekWeatherDescription,
-			dayTempHigh,
-			dayTempLow,
-			weekIcon,
-			weekHtml,
-		};
+		return weekHtml;
+
+		// return {
+		// 	dayOfWeek,
+		// 	weekWeatherDescription,
+		// 	dayTempHigh,
+		// 	dayTempLow,
+		// 	weekIcon,
+		// 	weekHtml,
+		// };
 	}
 
-	const currData = await getCurrData(weatherData);
-	const hourData = await getHourData(weatherData);
-	const weekData = await getWeekData(weatherData);
+	const currData = await getCurrData(apiResponse);
+	const hourData = await getHourData(apiResponse);
+	const weekData = await getWeekData(apiResponse);
 
 	// RETURN the whole thing as an object
 
@@ -136,75 +160,4 @@ exports.insertWeather = async function (weatherData) {
 		hourData,
 		weekData,
 	};
-
-	// return {
-	// 	currWeatherDescription,
-	// 	currTemp,
-	// 	currIcon,
-	// 	hour,
-	// 	hourlyWeatherDescription,
-	// 	dayOfWeek,
-	// };
 };
-
-// module.exports = (index, weatherData) => {
-// 	let output = index.replace(
-// 		/{%MYCITY%}/g,
-// 		document.getElementById('my-city').value
-// 	);
-// 	output = output.replace(
-// 		/{%CURRWEATHERDESCRIPTION%}/g,
-// 		weatherData.current.weather[0].description
-// 	);
-// 	output = output.replace(
-// 		/{%CURRTEMP%}/g,
-// 		Math.trunc(((weatherData.current.temp - 273.15) * 9) / 5 + 32)
-// 	);
-// 	output = output.replace(
-// 		/{%CURRICON%}/g,
-// 		`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`
-// 	);
-// 	output = output.replace(
-// 		/{%HOUR%}/g,
-// 		new Date(hourTimeStamp * 1000).toLocaleString('en-US', {
-// 			hour: 'numeric',
-// 			hour12: true,
-// 		})
-// 	);
-// 	output = output.replace(
-// 		/{%HOURLYWEATHERDESCRIPTION%}/g,
-// 		hourArray[i].weather[0].description
-// 	);
-// 	output = output.replace(
-// 		/{%HOURLYTEMP%}/g,
-// 		Math.trunc(((hourArray[i].temp - 273.15) * 9) / 5 + 32)
-// 	);
-// 	output = output.replace(
-// 		/{%HOURLYICON%}/g,
-// 		`http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`
-// 	);
-// 	output = output.replace(
-// 		/{%DAYOFWEEK%}/g,
-// 		new Date(dayTimeStamp * 1000).toLocaleString('en-US', {
-// 			weekday: 'long',
-// 		})
-// 	);
-// 	output = output.replace(
-// 		/{%WEEKWEATHERDESCRIPTION%}/g,
-// 		weekArray[i].weather[0].description
-// 	);
-// 	output = output.replace(
-// 		/{%DAYTEMPHIGH%}/g,
-// 		Math.trunc(((weekArray[i].temp.max - 273.15) * 9) / 5 + 32)
-// 	);
-// 	output = output.replace(
-// 		/{%DAYTEMPLOW%}/g,
-// 		Math.trunc(((weekArray[i].temp.min - 273.15) * 9) / 5 + 32)
-// 	);
-// 	output = output.replace(
-// 		/{%WEEKICON%}/g,
-// 		`http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`
-// 	);
-
-// 	return output;
-// };

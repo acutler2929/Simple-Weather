@@ -66,22 +66,9 @@ weekWeatherBtn.addEventListener('click', function () {
 });
 
 //////////////// building the function that inserts weather into the HTML:
-function insertWeatherData(weatherData) {
+function insertWeatherData(data) {
 	function displayCurrWeather() {
-		// console.log(weatherData);
-		const currTemp = Math.trunc(
-			((weatherData.current.temp - 273.15) * 9) / 5 + 32
-		);
-		const currWeatherDescription =
-			weatherData.current.weather[0].description;
-		const currIcon = `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`;
-
-		const currentHtml = `
-				<div id="current-weather" class="forecast-boxes">
-					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-					<img id="current-weather-img" src="${currIcon}" />
-				</div>
-				`;
+		const currentHtml = data.currData;
 
 		document
 			.getElementById('current-weather-wrapper')
@@ -90,32 +77,9 @@ function insertWeatherData(weatherData) {
 	}
 
 	//////////////// then display the 24-hour weather...
-	function displayHourlyWeather() {
-		// for some reason the hourly data comes to us in reverse order, so I just unreverse it:
-		const hourArray = weatherData.hourly.slice(0, 12).reverse();
-
-		hourArray.forEach((data, i) => {
-			const hourTimeStamp = hourArray[i].dt;
-			const hour = new Date(hourTimeStamp * 1000).toLocaleString(
-				'en-US',
-				{ hour: 'numeric', hour12: true }
-			);
-
-			const hourlyTemp = Math.trunc(
-				((hourArray[i].temp - 273.15) * 9) / 5 + 32
-			);
-			const hourlyWeatherDescription =
-				hourArray[i].weather[0].description;
-			const hourlyIcon = `http://openweathermap.org/img/wn/${hourArray[i].weather[0].icon}@2x.png`;
-
-			const hourlyHtml = `
-					<div class="forecast-boxes hourly-forecast">
-						<p class="hourly-forecast-text">
-						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
-						</p>
-						<img class="hourly-img" src="${hourlyIcon}" />
-					</div>
-					`;
+	function displayHourlyWeather(data) {
+		data.hourData.forEach((data) => {
+			let hourlyHtml = data;
 
 			document
 				.getElementById('hourly-forecast-wrapper')
@@ -124,38 +88,9 @@ function insertWeatherData(weatherData) {
 	}
 
 	///////////////// and finally display the weather for the week...
-	function displayWeekWeather() {
-		// for some reason the weeks data comes to us in reverse order, so I just unreverse it:
-		const weekArray = weatherData.daily.reverse();
-
-		weekArray.forEach((data, i) => {
-			const dayTimeStamp = weekArray[i].dt;
-
-			const dayOfWeek = new Date(dayTimeStamp * 1000).toLocaleString(
-				'en-US',
-				{ weekday: 'long' }
-			);
-			// console.log(dayTimeStamp);
-			// console.log(dayOfWeek);
-
-			const dayTempHigh = Math.trunc(
-				((weekArray[i].temp.max - 273.15) * 9) / 5 + 32
-			);
-
-			const dayTempLow = Math.trunc(
-				((weekArray[i].temp.min - 273.15) * 9) / 5 + 32
-			);
-
-			const weekWeatherDescription = weekArray[i].weather[0].description;
-			const weekIcon = `http://openweathermap.org/img/wn/${weekArray[i].weather[0].icon}@2x.png`;
-
-			const weekHtml = `
-					<div class="forecast-boxes one-week-forecast">
-					<p class="one-week-forecast-text">
-						${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-						<img class="one-week-img" src="${weekIcon}" />
-					</div>
-				`;
+	function displayWeekWeather(data) {
+		data.weekData.forEach((data) => {
+			let weekHtml = data;
 
 			document
 				.getElementById('one-week-forecast-wrapper')
@@ -163,31 +98,39 @@ function insertWeatherData(weatherData) {
 		});
 	}
 
-	displayCurrWeather();
-	displayHourlyWeather();
-	displayWeekWeather();
+	displayCurrWeather(data);
+	displayHourlyWeather(data);
+	displayWeekWeather(data);
 }
 
 //////////// click on submit, and grab weatherData from API call...
 async function getWeather() {
-	// const requestBody = {
-	// 	myCity: document.getElementById('my-city').value,
-	// 	stateCode: document.getElementById('state-code').value,
-	// 	countryCode: document.getElementById('country-code').value,
-	// };
-	/////////// use this requestBody object for testing:
 	const requestBody = {
-		myCity: 'kalamazoo',
-		stateCode: 'mi',
-		countryCode: 'usa',
+		myCity: document.getElementById('my-city').value,
+		stateCode: document.getElementById('state-code').value,
+		countryCode: document.getElementById('country-code').value,
 	};
+	/////////// use this requestBody object for testing:
+	// const requestBody = {
+	// 	myCity: 'kalamazoo',
+	// 	stateCode: 'mi',
+	// 	countryCode: 'usa',
+	// };
 	console.log(requestBody);
 	console.log('getWeather has been clicked');
 	await fetch('/getWeather', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(requestBody),
-	});
-	// console.log('weather has been fetched');
-	// insertWeatherData();
+	})
+		.then((res) => {
+			console.log(res);
+			const dataInserts = res.json();
+			console.log(dataInserts);
+			return dataInserts;
+		})
+		.then((dataInserts) => {
+			console.log(dataInserts);
+			insertWeatherData(dataInserts);
+		});
 }

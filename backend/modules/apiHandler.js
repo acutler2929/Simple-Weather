@@ -21,20 +21,24 @@ exports.getWeather = async function (city, state, country) {
 		)
 		.then((res) => {
 			geoData = res.data;
-
 			return geoData;
 		})
 		.catch((err) => {
 			console.log('Error: ', err.message);
 		});
 
-	const myCityLat = geoData[0].lat;
-	const myCityLon = geoData[0].lon;
+	const locationData = {
+		myCity: city,
+		stateCode: state,
+		countryCode: country,
+		myCityLat: geoData[0].lat,
+		myCityLon: geoData[0].lon,
+	};
 
 	//////////////////// send coordinates to get the weather...
 	await axios
 		.get(
-			`https://api.openweathermap.org/data/2.5/onecall?lat=${myCityLat}&lon=${myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
+			`https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.myCityLat}&lon=${locationData.myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
 		)
 		.then((res) => {
 			weatherData = res.data;
@@ -47,5 +51,5 @@ exports.getWeather = async function (city, state, country) {
 			console.log('Error: ', err.message);
 		});
 
-	return weatherData;
+	return { locationData, weatherData };
 };

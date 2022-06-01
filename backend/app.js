@@ -10,10 +10,6 @@ const dataHandler = require('./modules/dataHandler');
 
 const app = express();
 
-// const myCity = 'kalamazoo';
-// const stateCode = 'mi';
-// const countryCode = 'usa';
-
 console.log('hello from app.js!');
 
 app.use(express.json());
@@ -26,27 +22,26 @@ app.use(express.static('../frontend'));
 app.post('/getWeather', async (req, res) => {
 	console.log('hello from app.js => getWeather!');
 
-	// weatherData comes back from api Handler...
-	const weatherData = await apiHandler.getWeather(
+	// apiResponse comes back from api Handler...
+	const apiResponse = await apiHandler.getWeather(
 		req.body.myCity,
 		req.body.stateCode,
 		req.body.countryCode
 	);
 
-	const dataPhrase = `it is currently ${weatherData.current.weather[0].description} in ${req.body.myCity}, ${req.body.stateCode}`;
+	// console.log(apiResponse);
+
+	const dataPhrase = `it is currently ${apiResponse.weatherData.current.weather[0].description} in ${apiResponse.locationData.myCity}, ${apiResponse.locationData.stateCode}`;
 	console.log(dataPhrase);
 
-	// then we send weatherData to dataHandler.js- htmlInserts come back from dataHandler.js and are then sent to the frontend client.js:
-	const htmlInserts = await dataHandler.insertWeather(weatherData);
-	console.log(
-		`it is currently ${htmlInserts.currData.currWeatherDescription}`
-	);
-	console.log(htmlInserts);
+	// then we send apiResponse to dataHandler.js- htmlInserts come back from dataHandler.js and are then sent to the frontend client.js:
+	const htmlInserts = await dataHandler.insertWeather(apiResponse);
+	// console.log(
+	// 	`it is currently ${htmlInserts.currData.currWeatherDescription}`
+	// );
+	// console.log(htmlInserts);
+
+	res.send(htmlInserts);
 });
 
-// app.post('/insertWeather', (req, res) => {
-// 	// console.log(req.body);
-// 	// console.log(res.body);
-// 	console.log('hello from POST request');
-// });
 module.exports = app;
