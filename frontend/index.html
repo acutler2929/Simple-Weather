@@ -6,11 +6,11 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Simple Weather</title>
 		<link rel="stylesheet" href="style.css" />
-		<script defer type="module" src="app.js"></script>
+		<script defer type="module" src="client.js"></script>
 	</head>
 	<body>
 		<header>
-			<h1>Welcome to my minimalist weather app!</h1>
+			<h1 name="intro">Welcome to my minimalist weather app!</h1>
 			<i>~Powered by Open Weather API~</i>
 			<p>Your City:</p>
 		</header>
@@ -22,12 +22,14 @@
 						class="input-fields"
 						id="my-city"
 						placeholder="city"
+						name="city"
 					/>
 					<input
 						type="text"
 						class="input-fields"
 						id="state-code"
 						placeholder="state eg: AL"
+						name="state"
 					/>
 					<select id="country-code">
 						<option value="USA">USA</option>
@@ -64,25 +66,31 @@
 			</div>
 		</nav>
 		<div id="forecast-wrapper">
-			<div id="current-weather-wrapper">
+			<div id="current-weather-wrapper" class="hidden">
 				<!-- <div id="current-weather" class="forecast-boxes">
-					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-					<img id="current-weather-img" src="${currIcon}" />
+					<p id="current-weather-text">
+						The weather in {%MYCITY%} is currently
+						{%CURRWEATHERDESCRIPTION%} at {%CURRTEMP%} &deg;F.
+					</p>
+					<img id="current-weather-img" src="{%CURRICON%}" />
 				</div> -->
 			</div>
 			<div id="hourly-forecast-wrapper" class="hidden">
 				<!-- <div class="forecast-boxes hourly-forecast">
 					<p class="hourly-forecast-text">
-						${hour} ${hourlyWeatherDescription}<br> at ${hourlyTemp} &deg;F
+						{%HOUR%} {%HOURLYWEATHERDESCRIPTION%}<br />
+						at {%HOURLYTEMP%} &deg;F
 					</p>
-					<img class="hourly-img" src="${hourlyIcon}" />
+					<img class="hourly-img" src="{%HOURLYICON%}" />
 				</div> -->
 			</div>
 			<div id="one-week-forecast-wrapper" class="hidden">
 				<!-- <div class="forecast-boxes one-week-forecast">
 					<p class="one-week-forecast-text">
-					${dayOfWeek} ${weekWeatherDescription}<br> at ${dayTempHigh} / ${dayTempLow} &deg;F</p>
-					<img class="one-week-img" src="${weekIcon}" />
+						{%DAYOFWEEK%} {%WEEKWEATHERDESCRIPTION%}<br />
+						at {%DAYTEMPHIGH%} / {%DAYTEMPLOW%} &deg;F
+					</p>
+					<img class="one-week-img" src="{%WEEKICON%}" />
 				</div> -->
 			</div>
 		</div>
