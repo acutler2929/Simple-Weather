@@ -68,29 +68,23 @@
 		<div id="forecast-wrapper">
 			<div id="current-weather-wrapper" class="hidden">
 				<!-- <div id="current-weather" class="forecast-boxes">
-					<p id="current-weather-text">
-						The weather in {%MYCITY%} is currently
-						{%CURRWEATHERDESCRIPTION%} at {%CURRTEMP%} &deg;F.
-					</p>
-					<img id="current-weather-img" src="{%CURRICON%}" />
-				</div> -->
+				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
+				<img id="current-weather-img" src="${currIcon}" />
+			</div> -->
 			</div>
 			<div id="hourly-forecast-wrapper" class="hidden">
 				<!-- <div class="forecast-boxes hourly-forecast">
 					<p class="hourly-forecast-text">
-						{%HOUR%} {%HOURLYWEATHERDESCRIPTION%}<br />
-						at {%HOURLYTEMP%} &deg;F
+						${hour[i]} ${hourlyWeatherDescription[i]}<br> at ${hourlyTemp[i]} &deg;F
 					</p>
-					<img class="hourly-img" src="{%HOURLYICON%}" />
+					<img class="hourly-img" src="${hourlyIcon[i]}" />
 				</div> -->
 			</div>
 			<div id="one-week-forecast-wrapper" class="hidden">
 				<!-- <div class="forecast-boxes one-week-forecast">
 					<p class="one-week-forecast-text">
-						{%DAYOFWEEK%} {%WEEKWEATHERDESCRIPTION%}<br />
-						at {%DAYTEMPHIGH%} / {%DAYTEMPLOW%} &deg;F
-					</p>
-					<img class="one-week-img" src="{%WEEKICON%}" />
+						${dayOfWeek[i]} ${weekWeatherDescription[i]}<br> at ${dayTempHigh[i]} / ${dayTempLow[i]} &deg;F</p>
+					<img class="one-week-img" src="${weekIcon[i]}" />
 				</div> -->
 			</div>
 		</div>

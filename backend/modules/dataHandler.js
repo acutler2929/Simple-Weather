@@ -15,27 +15,19 @@ exports.insertWeather = async function (apiResponse) {
 			currIcon = `http://openweathermap.org/img/wn/${data.weatherData.current.weather[0].icon}@2x.png`,
 			myCity = data.locationData.myCity,
 			currHtml = `
-			<div id="current-weather" class="forecast-boxes">
-				<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
-				<img id="current-weather-img" src="${currIcon}" />
-			</div>
+				<div id="current-weather" class="forecast-boxes">
+					<p id="current-weather-text">The weather in ${myCity} is currently ${currWeatherDescription} at ${currTemp} &deg;F.</p>
+					<img id="current-weather-img" src="${currIcon}" />
+				</div>
 			`;
 
 		// console.log(currWeatherDescription); // <-- works just fine
 
 		return currHtml;
-
-		// return {
-		// 	currWeatherDescription,
-		// 	currTemp,
-		// 	currIcon,
-		// 	myCity,
-		// 	currHtml,
-		// };
 	}
 
 	async function getHourData(data) {
-		const hourArray = data.weatherData.hourly.slice(0, 12);
+		const hourArray = data.weatherData.hourly.slice(0, 12).reverse();
 		// console.log(hourArray);
 		let hourTimeStamp = [];
 		let hour = [];
@@ -74,7 +66,7 @@ exports.insertWeather = async function (apiResponse) {
 	}
 
 	async function getWeekData(data) {
-		const weekArray = data.weatherData.daily;
+		const weekArray = data.weatherData.daily.reverse();
 		let dayTimeStamp = [];
 		let dayOfWeek = [];
 		let weekWeatherDescription = [];

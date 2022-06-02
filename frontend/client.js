@@ -1,6 +1,6 @@
 'use stirct';
 
-//////////// show the nav tabs:
+//////////// "SUBMIT" button shows the nav tabs :
 function showForecastButtons() {
 	document.getElementById('forecast-buttons').classList.remove('hidden');
 	document
@@ -43,28 +43,6 @@ function selectWeekWeather() {
 	// console.log('Show just the weeks weather');
 }
 
-///////////////////// adding event listeners to the buttons:
-const getWeatherBtn = document.getElementById('get-weather-button');
-const currWeatherBtn = document.getElementById('current-weather-btn');
-const hourWeatherBtn = document.getElementById('hourly-weather-btn');
-const weekWeatherBtn = document.getElementById('week-weather-btn');
-
-getWeatherBtn.addEventListener('click', function () {
-	showForecastButtons();
-});
-getWeatherBtn.addEventListener('click', function () {
-	getWeather();
-});
-currWeatherBtn.addEventListener('click', function () {
-	selectCurrentWeather();
-});
-hourWeatherBtn.addEventListener('click', function () {
-	selectHourlyWeather();
-});
-weekWeatherBtn.addEventListener('click', function () {
-	selectWeekWeather();
-});
-
 //////////////// building the function that inserts weather into the HTML:
 function insertWeatherData(data) {
 	function displayCurrWeather() {
@@ -105,6 +83,16 @@ function insertWeatherData(data) {
 
 //////////// click on submit, and grab weatherData from API call...
 async function getWeather() {
+	//////////////// "SUBMIT" button also clears any current weather before adding queried weather
+	(function clearWeather() {
+		console.log('clearWeather() has been called...');
+
+		document.getElementById('current-weather-wrapper').innerHTML = '';
+		document.getElementById('hourly-forecast-wrapper').innerHTML = '';
+		document.getElementById('one-week-forecast-wrapper').innerHTML = '';
+	})();
+
+	/////////// request will be made up of City/State data entered in the form:
 	const requestBody = {
 		myCity: document.getElementById('my-city').value,
 		stateCode: document.getElementById('state-code').value,
@@ -118,19 +106,45 @@ async function getWeather() {
 	// };
 	console.log(requestBody);
 	console.log('getWeather has been clicked');
+
+	///////////////////// the we send a POST request to the backend...
 	await fetch('/getWeather', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(requestBody),
 	})
+		//////////////// we store the response data in dataInserts...
 		.then((res) => {
 			console.log(res);
 			const dataInserts = res.json();
 			console.log(dataInserts);
 			return dataInserts;
 		})
+		///////////// then we call insertWeatherData with dataInserts as the argument:
 		.then((dataInserts) => {
 			console.log(dataInserts);
 			insertWeatherData(dataInserts);
 		});
 }
+
+///////////////////// adding event listeners to the buttons:
+const getWeatherBtn = document.getElementById('get-weather-button');
+const currWeatherBtn = document.getElementById('current-weather-btn');
+const hourWeatherBtn = document.getElementById('hourly-weather-btn');
+const weekWeatherBtn = document.getElementById('week-weather-btn');
+
+getWeatherBtn.addEventListener('click', function () {
+	showForecastButtons();
+});
+getWeatherBtn.addEventListener('click', function () {
+	getWeather(), selectCurrentWeather();
+});
+currWeatherBtn.addEventListener('click', function () {
+	selectCurrentWeather();
+});
+hourWeatherBtn.addEventListener('click', function () {
+	selectHourlyWeather();
+});
+weekWeatherBtn.addEventListener('click', function () {
+	selectWeekWeather();
+});
