@@ -8,6 +8,7 @@ header {
 	text-align: center;
 }
 
+/***************************** INPUT FIELDS ***********************/
 #city-input {
 	margin: auto;
 	text-align: center;
@@ -20,6 +21,7 @@ header {
 }
 
 #forecast-wrapper {
+	align-items: center;
 	display: flex;
 	flex-direction: column;
 	width: 75vw;
@@ -27,6 +29,31 @@ header {
 	position: relative;
 }
 
+/*********************** ERROR MESSAGE **********************/
+#error-message {
+	border: 2px solid black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 3px;
+	/* text-align: space-around; */
+	height: 300px;
+	width: 300px;
+}
+
+#error-message-text {
+	font-size: 20px;
+	margin: 10px 2px 10px 2px;
+}
+
+#error-message-img {
+	height: 120px;
+	width: 120px;
+	margin-bottom: 25%;
+}
+
+/******************************* CURRENT WEATHER ***********************/
 #current-weather-wrapper {
 	display: flex;
 	justify-content: center;

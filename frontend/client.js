@@ -43,8 +43,20 @@ function selectWeekWeather() {
 	// console.log('Show just the weeks weather');
 }
 
+/////////////////// display the error message:
+function displayError() {
+	document
+		.getElementById('one-week-forecast-wrapper')
+		.classList.add('hidden');
+	document.getElementById('current-weather-wrapper').classList.add('hidden');
+	document.getElementById('hourly-forecast-wrapper').classList.add('hidden');
+	document.getElementById('error-message').classList.remove('hidden');
+	console.log('ERROR');
+}
+
 //////////////// building the function that inserts weather into the HTML:
 function insertWeatherData(data) {
+	// data = 'ERROR';
 	function displayCurrWeather() {
 		const currentHtml = data.currData;
 
@@ -76,20 +88,27 @@ function insertWeatherData(data) {
 		});
 	}
 
-	displayCurrWeather(data);
-	displayHourlyWeather(data);
-	displayWeekWeather(data);
+	////////////// check if error message is present. if it is, display it
+	if (data.message === 'ERROR') {
+		displayError();
+	} else {
+		showForecastButtons();
+		displayCurrWeather(data);
+		displayHourlyWeather(data);
+		displayWeekWeather(data);
+	}
 }
 
 //////////// click on submit, and grab weatherData from API call...
 async function getWeather() {
-	//////////////// "SUBMIT" button also clears any current weather before adding queried weather
+	//////////////// "SUBMIT" button also clears any current weather messages before adding queried weather
 	(function clearWeather() {
 		console.log('clearWeather() has been called...');
 
 		document.getElementById('current-weather-wrapper').innerHTML = '';
 		document.getElementById('hourly-forecast-wrapper').innerHTML = '';
 		document.getElementById('one-week-forecast-wrapper').innerHTML = '';
+		document.getElementById('error-message').classList.add('hidden');
 	})();
 
 	/////////// request will be made up of City/State data entered in the form:
@@ -133,9 +152,6 @@ const currWeatherBtn = document.getElementById('current-weather-btn');
 const hourWeatherBtn = document.getElementById('hourly-weather-btn');
 const weekWeatherBtn = document.getElementById('week-weather-btn');
 
-getWeatherBtn.addEventListener('click', function () {
-	showForecastButtons();
-});
 getWeatherBtn.addEventListener('click', function () {
 	getWeather(), selectCurrentWeather();
 });

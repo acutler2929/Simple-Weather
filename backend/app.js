@@ -30,14 +30,18 @@ app.post('/getWeather', async (req, res) => {
 	);
 
 	// console.log(apiResponse);
+	if (apiResponse.message === 'ERROR') {
+		res.send(apiResponse);
+	} else {
+		const dataPhrase = `it is currently ${apiResponse.weatherData.current.weather[0].description} in ${apiResponse.locationData.myCity}, ${apiResponse.locationData.stateCode}`;
+		console.log(dataPhrase);
 
-	const dataPhrase = `it is currently ${apiResponse.weatherData.current.weather[0].description} in ${apiResponse.locationData.myCity}, ${apiResponse.locationData.stateCode}`;
-	console.log(dataPhrase);
+		// then we send apiResponse to dataHandler.js- htmlInserts come back from dataHandler.js and are then sent to the frontend client.js:
+		const htmlInserts = await dataHandler.insertWeather(apiResponse);
+		// const htmlInserts = { body: 'ERROR' };
 
-	// then we send apiResponse to dataHandler.js- htmlInserts come back from dataHandler.js and are then sent to the frontend client.js:
-	const htmlInserts = await dataHandler.insertWeather(apiResponse);
-
-	res.send(htmlInserts);
+		res.send(htmlInserts);
+	}
 });
 
 module.exports = app;
