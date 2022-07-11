@@ -4,3 +4,6 @@ deployment:
         - export DEPLOYPATH=/home/alicqplp/simpleweather.alicecutler.dev/
         - /bin/cp -R backend $DEPLOYPATH
         - /bin/cp -R frontend $DEPLOYPATH
+        - /bin/cp -R node_modules $DEPLOYPATH
+        - /bin/cp .env $DEPLOYPATH
+        - /bin/cp package.json $DEPLOYPATH
