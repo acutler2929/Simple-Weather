@@ -4,8 +4,8 @@ const axios = require('axios');
 const app = require('../app');
 
 // Use this variable only when testing; when live, apiKey is set to an environment variable in CPanel:
-const apiKey = process.env.API_KEY;
-// console.log(apiKey);
+// const apiKey = process.env.API_KEY;
+// paste api from your notes into a string variable here
 
 console.log('hello from apiHandler!');
 
@@ -46,7 +46,7 @@ exports.getWeather = async function (city, state, country) {
 		//////////////////// send coordinates to get the weather...
 		await axios
 			.get(
-				`https://api.openweathermap.org/data/2.5/onecall?lat=${locationData.myCityLat}&lon=${locationData.myCityLon}&exclude=minutely,alerts&appid=${apiKey}`
+				`https://api.openweathermap.org/data/2.5/weather?lat=${locationData.myCityLat}&lon=${locationData.myCityLon}&appid=${apiKey}`
 			)
 			.then((res) => {
 				weatherData = res.data;

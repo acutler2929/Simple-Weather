@@ -29,7 +29,8 @@ app.post('/getWeather', async (req, res) => {
 		req.body.countryCode
 	);
 
-	// console.log(apiResponse);
+	console.log("Why is this response undefined???  Error 401...")
+	console.log(JSON.parse(apiResponse));
 	if (apiResponse.message === 'ERROR') {
 		res.send(apiResponse);
 	} else {
